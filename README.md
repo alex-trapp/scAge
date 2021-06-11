@@ -2,7 +2,9 @@
 
 # scAge
 
-scAge is a probabilistic framework for epigenetic age profiling at single-cell resolution, developed in Python.
+scAge is a probabilistic framework for epigenetic age profiling at single-cell resolution, developed in Python. <br>
+This tool leverages the linear relationship of methylation and chronological age at some CpGs in the DNA, and uses these models to predict
+epigenetic age in single cell data. <br>
 To learn more about the underlying algorithms driving scAge, consult our [preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
 
 ## Installation
@@ -42,12 +44,18 @@ This dataframe must contain an "Age" column, which is used to compute correlatio
 ### Loading single-cell methylomes
 scAge requires binary methylation matrices as input for the epigenetic age profiling algorithm. These binary matrices can be obtained
 by processing existing .cov files produced by [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/). Depending on the tool used,
-final single-cell methylome files may have slightly different formats. This may require slightly modifying the function provided. 
+final single-cell methylome files may have slightly different formats. The Bismark .cov file format is the following:
+
+Chromosome | Position 1 | Position 2 | Methylation level | Methylated counts | Unmethylated counts
+:---: | :---: | :---: | :---: | :---: | :---: 
+11 | 3100225 | 3100225 | 100 | 1 | 0
+11 | 3101286 | 3101286 | 0 | 0 | 2
+
+This may require slightly modifying the function provided. 
 In the end, scAge requires a .tsv file or pandas datraframe with two columns:
-provide additional info on Bismark files
 
 ChrPos | MetLev
------------- | -------------
+:---: | :---:
 chr1_3037802 | 1
 chr19_61305429 | 0
 ... | ...
@@ -73,4 +81,4 @@ process_cov(cov_directory,
                    "hard binarization" rounds remaining non-binary values to 0 or 1 depending on proximity <br>
                    "soft binarization" discards remaining non-binary values <br>
 `output_path` --> the output directory to which processed .tsv binary matrices should be written to <br>
-If `output_path` is set to `None`, named binary methylation matrices are returned 
+                  <t> <t> If `output_path` is set to `None`, named binary methylation matrices are returned <br>
