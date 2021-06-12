@@ -154,11 +154,11 @@ The leftmost columns are the most critical, including:
 * `MeanMet` --> mean global methylation of the single cell
 * `CellCoverage` --> number of CpGs covered in the single cell (can be used to filter predictions)
 
-Cell | PredictedAge | MeanMet | CellCoverage
-:---: | :---: | :---: | :---: |
-SRR3136627 | 0.5 | 0.663169 | 3914949 |
-SRR3136659 | 4.0 | 0.683454 | 799350 |
-SRR3136628 | 25.0 | 0.695256 | 2511084 |
+Cell | PredictedAge | MeanMet | CellCoverage | ... |
+:---: | :---: | :---: | :---: | | :---: |
+SRR3136627 | 0.5 | 0.663169 | 3914949 | ... |
+SRR3136659 | 4.0 | 0.683454 | 799350 | ... |
+SRR3136628 | 25.0 | 0.695256 | 2511084 | ...|
 
 ## Troubleshooting
 If you encounter any issue when trying to run scAge, please open a pull request <br> or contact me by email: alexandre.trapp1@gmail.com
