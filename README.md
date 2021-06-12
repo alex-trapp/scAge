@@ -19,6 +19,8 @@ To run scAge functions, import the module into a Python script or Jupyter notebo
 ## Usage
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
 
+An example Jupyter notebook to calculate epigenetic age in a sample of cells from the [Gravina et al. study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3) is provided in the notebooks folder.
+
 ### Training
 CpG-specific linear models are first calculated using a reference bulk dataset, which may contain some missing values.
 Using single tissue or single cell-type datasets is preferred to improve prediction accuracy, although multi-tissue datasets
@@ -36,10 +38,10 @@ construct_reference(training_DNAm_matrix,
 This function takes as input a pandas dataframe DNAm matrix, with rows as samples and columns as CpGs (in the form chr9_85324737). 
 Methylation values must be in the range from 0 (fully unmethylated) to 1 (fully methylated)
 This dataframe must contain an "Age" column, which is used to compute correlations and linear regressions. <br>
-`training_DNAm_matrix` --> the input bulk reference matrix <br>
-`output_path` --> desired full path <br>
-`n_cores` -->  the number of cores that scAge should use via parallel processing <br>
-`chunksize` --> the number of individual CpG-age series that should be distributed at once to each worker <br>
+* `training_DNAm_matrix` --> the input bulk reference matrix <br>
+* `output_path` --> desired full path <br>
+* `n_cores` -->  the number of cores that scAge should use via parallel processing <br>
+* `chunksize` --> the number of individual CpG-age series that should be distributed at once to each worker <br>
 
 ### Loading single-cell methylomes
 scAge requires binary methylation matrices as input for the epigenetic age profiling algorithm. These binary matrices can be obtained
@@ -71,14 +73,61 @@ process_cov(cov_directory,
             output_path = None):
 ```
 
-`cov_directory` --> the path to the directory where .cov single-cell methylation files are stored <br>
-`n_cores` --> the number of cores to use for parallel processing <br>
-`maxmet` --> the maximum methylation value (normally, methylation ratios from Bismark range from 0 to 100) <br>
-`split` -->  desired string to split the file name on for single-cell name generation (i.e. "SRR3136624.cov" --> "SRR3136624") <br>
-`chunksize` --> number of coverage files that will be fed into a single worker process at a time <br>
-`binarization` --> choice of hard vs. soft  <br>
-                   both involve dropping methylation values of 0.5 <br>
-                   "hard binarization" rounds remaining non-binary values to 0 or 1 depending on proximity <br>
+* `cov_directory` --> the path to the directory where .cov single-cell methylation files are stored <br>
+* `n_cores` --> the number of cores to use for parallel processing <br>
+* `maxmet` --> the maximum methylation value (normally, methylation ratios from Bismark range from 0 to 100) <br>
+* `split` -->  desired string to split the file name on for single-cell name generation (i.e. "SRR3136624.cov" --> "SRR3136624") <br>
+* `chunksize` --> number of coverage files that will be fed into a single worker process at a time <br>
+* `binarization` --> choice of hard vs. soft.
+                   Both methods involve dropping methylation values of 0.5.
+                   "hard binarization" rounds remaining non-binary values to 0 or 1 depending on proximity, while
                    "soft binarization" discards remaining non-binary values <br>
-`output_path` --> the output directory to which processed .tsv binary matrices should be written to <br>
-                  <t> <t> If `output_path` is set to `None`, named binary methylation matrices are returned <br>
+* `output_path` --> the output directory to which processed .tsv binary matrices should be written to
+If `output_path` is set to `None`, named binary methylation matrices are returned <br>
+
+### Predicting epigenetic age
+The core of scAge is run_scAge, a function that enables epigenetic age predictions from a previously computed set of binarized single-cell
+methylome profiles and a reference linear regression matrix generated from bulk data. To run this function:
+```
+scAge.run_scAge(single_cell_dir_or_dict,
+                single_cell_set_name,
+                reference_data,
+                selection_mode = "percentile",
+                CpG_parameter = 1,
+                zero_met_replacement = 0.001,
+                one_met_replacement = 0.999,
+                min_age = -20,
+                max_age = 60,
+                age_step = 0.1,
+                n_cores = 3,
+                uncertainty = 1,
+                output_path = None,
+                chunksize = 1)
+```
+
+* `single_cell_dir_or_dict` --> full path to a directory or a dictionary of processed single-cell methylomes, created with `process_cov`
+* `single_cell_set_name` --> desired name of the scAge run (i.e. 'dataset_x)
+* `reference_data` --> full path to the reference matrix created with `create_reference`
+* `selection_mode` --> one of `percentile`, `numCpGs`, `cutoff`, which determines which CpG selection mode should be used in the algorithm
+* `CpG_parameter` --> parameter accompanying selection mode (1 in percentile mode --> top 1% age-correlated CpGs)
+* `zero_met_replacement1` --> if the linear model goes below 0, this value replaces the probability
+* `one_met_replacement` --> if the linear model goes above 1, this value replaces the probability
+* `min_age` --> minimum age for probability computations
+* `max_age` --> maximum age for probability computations
+* `age_step` --> step (in months) that probability computations should be performed at (age_step = 0.1 --> (min_age, min_age + age_step, ..., max_age)
+* `n_cores` --> number of cores that should be used for parallelization
+* `uncertainty` --> the uncertainty metric that should be used to compute upper and lower bounds (higher value --> wider interval)
+* `output_path` --> full path to the directory where predictions and the report file should be written to
+* `chunksize` --> number of single-cell methylomes that should be passed to each parallel worker at once
+
+The output of run_scAge is a .tsv matrix, which contains a number of columns which detail the internal computations of the algorithm.
+The leftmost columns are the most crucial, including: 
+* `PredictedAge` --> scDNAm epigenetic age predictions
+* `MeanMet` --> mean global methylation of the single cell
+* `CellCoverage` --> number of CpGs covered in the single cell
+
+Cell | PredictedAge | MeanMet | CellCoverage
+:---: | :---: | :---: | :---: |
+SRR3136627 | 0.5 | 0.663169 | 3914949 |
+SRR3136659 | 4.0 | 0.683454 | 799350 |
+SRR3136628 | 25.0 | 0.695256 | 2511084 |
