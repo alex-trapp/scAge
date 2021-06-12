@@ -16,10 +16,27 @@ To run scAge functions, import the module into a Python script or Jupyter notebo
 
 `import scAge`
 
+In order to use scAge, the following packages need to be installed:
+
+`numpy` (developed with v1.20.2)
+`pandas` (developed with v1.2.4)
+`scipy` (developed with v1.6.3)
+`sklearn` (developed with v0.24.2) 
+`tqdm` (developed with v4.60.0)
+
 ## Usage
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
 
-An example Jupyter notebook to calculate epigenetic age in a sample of cells from the [Gravina et al. study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3) is provided in the notebooks folder.
+3 example Jupyter notebooks are provided in the `notebooks` directory:
+`example_process_coverage` --> processing .cov files from Bismark into processed binary methylation matrices
+`example_construct_reference` --> constructing a reference set of linear models from a bulk methylation matrix
+`example_run_scAge` --> predicting epigenetic age in single cells
+
+These notebooks use a sample of cells from the [Gravina et al. study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3), shown in Figure 2 of the manuscript. Required data to run these example scripts is provided:
+* Raw .cov files are provided in `sc_data_raw`
+* Processed binary methylation matrices are provided in `sc_data_processed`
+* Raw bulk data used to  is provided in `bulk`
+* Processed reference matrix is provided in `train`
 
 ### Training
 CpG-specific linear models are first calculated using a reference bulk dataset, which may contain some missing values.
