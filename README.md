@@ -2,26 +2,28 @@
 
 # scAge
 
-scAge is a probabilistic framework for epigenetic age profiling at single-cell resolution, developed entirely in Python. <br> <br>
-This tool leverages the relationship between methylation and chronological age at some CpGs in the DNA, and uses a combination of linear models to predict
-epigenetic age in sparse and binary single-cell data. <br> <br>
-To learn more about the underlying algorithms driving scAge, consult our [preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
+scAge is a probabilistic framework for epigenetic age profiling at single-cell resolution, developed in Python. <br> <br>
+This tool leverages the relationship between methylation at some CpGs in the DNA of bulk samples and chronological age to perform
+probability-based profiling of epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
+This approach is both scalable and flexible. It can be used on any number of cells and trained on any desired methylation-age dataset. <br> <br>
+To learn more about the underlying algorithms driving scAge, please consult our [preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
 
 ## Installation
-To install scAge and associated data, clone the GitHub repository. This contains all required data to test the software. <br>
-All required functions to run the scAge pipeline are stored within scAge.py.
+To install scAge and associated data, please clone the GitHub repository. 
 
-`git clone https://github.com/alex-trapp/scAge`
+`git clone https://github.com/alex-trapp/scAge.git`
 
-<br>
+This will download all required data to use and test the software. <br>
 
-To run scAge functions, import the module into a Python script or Jupyter notebook
+For ease of use, all functions needed to run the full scAge pipeline are included within scAge.py
+
+## Usage
+
+To run scAge, first import the module into a Python script or Jupyter notebook:
 
 `import scAge`
 
-<br>
-
-In order to use scAge, the following packages need to be installed:
+In order to use the functions involved in scAge, the following packages need to be installed:
 
 `numpy` (developed with version 1.20.2) <br>
 `pandas` (developed with version 1.2.4) <br>
@@ -29,7 +31,6 @@ In order to use scAge, the following packages need to be installed:
 `sklearn` (developed with version 0.24.2) <br>
 `tqdm` (developed with version 4.60.0) <br>
 
-## Usage
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
 
 3 example Jupyter notebooks are provided in the `notebooks` directory: <br>
@@ -96,7 +97,7 @@ process_coverage(cov_directory,
                  max_met = 100,
                  split = ".",
                  chunksize = 1,
-                 binarization = "hard",
+                 binarization = "round",
                  output_path = None):
 ```
 
@@ -105,10 +106,10 @@ process_coverage(cov_directory,
 * `maxmet` --> maximum methylation value (normally, methylation ratios from Bismark range from 0 to 100) <br>
 * `split` --> desired string to split the file name on for single-cell name generation (if split == "." --> "SRR3136624.cov" --> "SRR3136624") <br>
 * `chunksize` --> number of coverage files that will be fed into a single worker process at a time <br>
-* `binarization` --> choice of hard vs. soft.
+* `binarization` --> choice of "round" vs. "discard".
                    Both methods involve dropping methylation values of 0.5.
-                   "soft" discards remaining non-binary values
-                   "hard" rounds remaining non-binary values to 0 or 1 (default) <br>
+                   "round" rounds remaining non-binary values to 0 or 1 (default)
+                   "discard" discards remaining non-binary values <br>
 * `output_path` --> the output directory to which processed .tsv binary matrices should be written to
 If `output_path` is set to `None`, named binary methylation matrices are returned in the form of a dictionary <br>
 
@@ -142,7 +143,7 @@ scAge.run_scAge(single_cell_dir_or_dict,
 * `one_met_replacement` --> if the linear model goes above 1, this value replaces the probability
 * `min_age` --> minimum age for probability computations
 * `max_age` --> maximum age for probability computations
-* `age_step` --> step (in months) that probability computations should be performed at (age_step = 0.1 --> (min_age, min_age + age_step, ..., max_age)
+* `age_step` --> step for probability computations (i.e. if age_step == 1, likelihoods will be calculated for every 1 month between `min_age` and `max_age`)
 * `n_cores` --> number of cores that should be used for parallelization
 * `uncertainty` --> the uncertainty metric that should be used to compute upper and lower bounds (higher value --> wider interval)
 * `output_path` --> full path to the directory where predictions and the report file should be written to
@@ -162,3 +163,10 @@ SRR3136628 | 25.0 | 0.695256 | 2511084 | ... |
 
 ## Troubleshooting
 If you encounter any issue when trying to run scAge, please open a pull request <br> or contact me by email: alexandre.trapp1@gmail.com
+
+# Information and acknowledgments
+This software was developed by Alexandre Trapp, Technical Research Assistant in the Gladyshev Lab 
+at Harvard Medical School and Brigham and Women's Hospital. I want to acknowledge all the members
+of the Gladyshev Lab for their input, particularly Csaba Kerepesi and Vadim Gladyshev for their
+contributions to the project, as well as Tiamat Fox and Adit Ganguly for their help with schematic
+design.
