@@ -1,5 +1,4 @@
-![image](https://user-images.githubusercontent.com/83630286/121631269-bfda1d80-ca4c-11eb-830b-6c8378d18160.png)
-
+![image](images/scAge_schematic_GitHub.jpg)
 # scAge
 
 scAge is a probabilistic framework for epigenetic age profiling at single-cell resolution, developed in Python. <br> <br>
