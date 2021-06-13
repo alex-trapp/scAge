@@ -4,24 +4,34 @@
 scAge is a probabilistic framework for profiling epigenetic age at single-cell resolution, developed in Python. <br> <br>
 This tool leverages the relationship between DNA methylation in bulk samples and chronological age to perform
 probability-based profiling of epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
-This approach constitutes the first available single-cell clock, and is both highly scalable and flexible. <br> <br> 
+This approach constitutes the first single-cell clock method, and is both highly scalable and flexible. <br> <br> 
 It can be used on any number of cells and can be trained on any methylation-age dataset. <br> <br>
-To learn more about the underlying algorithms driving scAge, please consult our [preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
+To learn more about the underlying algorithms driving scAge, please consult the [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
+
+```
+Profiling epigenetic age in single cells
+Alexandre Trapp, Csaba Kerepesi, Vadim N. Gladyshev
+bioRxiv 2021.03.13.435247; doi: https://doi.org/10.1101/2021.03.13.435247
+```
 
 ## Installation
-To install scAge and associated data, please clone the GitHub repository:
+To install scAge and associated data, please download or clone the GitHub repository:
 
 `git clone https://github.com/alex-trapp/scAge.git`
 
-This will download all required data to use and test the software. <br>
+This will download all required data to utilize and test the software. <br>
 
-For ease of use, all functions needed to run the full scAge pipeline are included within scAge.py
+For ease of use, all functions needed to run the full scAge pipeline are directly included within scAge.py
 
 ## Usage
 
-To run scAge, first import the module into a Python script or Jupyter notebook:
+To run scAge, first add the directory containing scAge.py to your path, then import scAge into a Python script or Jupyter notebook:
 
-`import scAge`
+```
+import sys
+sys.path.append('/path/to/dir') # where dir contains scAge.py
+import scAge
+```
 
 In order to use the functions provided in scAge, the following packages need to be installed:
 
@@ -31,34 +41,38 @@ In order to use the functions provided in scAge, the following packages need to 
 `sklearn` (developed with version 0.24.2) <br>
 `tqdm` (developed with version 4.60.0) <br>
 
-We also recommend `seaborn` and `matplotlib` to visualize epigenetic age predictions in Python. If desired, predicted epigenetic age output files
-can also be analyzed in other environment (i.e. R).
+We also recommend installing `seaborn`, `matplotlib` and `statannot` to visualize epigenetic age predictions in Python.<br>
+Predicted epigenetic age output files are written as .tsv files, and can therefore also be analyzed in any other environment (i.e. R).
 
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
 
-3 example Jupyter notebooks are provided in the `examples/notebooks` directory: <br>
-* `process_coverage_notebook.ipynb` --> processing .cov/.cov.gz files from Bismark into processed binary methylation matrices <br>
+3 example Jupyter notebooks detailing how to use the scAge tool are provided in the `notebooks` directory: <br>
+* `process_coverage_notebook.ipynb` --> processing .cov/.cov.gz files from Bismark into filtered binary methylation matrices <br>
 * `construct_reference_notebook.ipynb` --> constructing a reference set of linear models from a bulk methylation matrix <br>
 * `example_run_scAge_notebook.ipynb` --> predicting epigenetic age in single cells <br>
 
-These notebooks use a sample of cells from the [Gravina et al. study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3),
+These notebooks use all the single cells from the [Gravina et al. 2016 study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3),
 described in Figure 2 of our manuscript. <br>
 Required data to run these example scripts is provided:
 * Raw .cov files of single-cell methylomes are located in `sc_data_raw`
 * Processed binary methylation matrices (produced by running `process_coverage` on raw .cov.gz files) are located in `sc_data_processed`
 * Raw bulk data for liver used to construct reference models is located in `bulk`
-* Processed reference matrix (produced by running `construct_reference` on raw bulk DNAm data) for liver is located in `train`
+* Processed reference matrices (produced by running `construct_reference` on raw bulk DNAm data) for liver, blood, and a multi-tissue dataset are located in `train`
 
 The functions driving scAge are explained and documented below, as well as deeply documented in the source code of scAge.py. <br>
-Default values for parameters in all functions are shown (i.e. `n_cores = 30`). The best values for some parameters (`cores`, `chunksize`)
-will depend on your hardware specifications.
+Default values for parameters in all functions are shown (i.e. `n_cores = 30`). The best values for some parameters (`n_cores`, `chunksize`)
+will depend on your hardware specifications. I recommend setting all the parameters for all functions to ensure intended functionality.
+
+## Data
+
+All data from this study is publicly available from the [GEO database](https://www.ncbi.nlm.nih.gov/geo/) or the [SRA](https://www.ncbi.nlm.nih.gov/sra) <br>
 
 ## Training
 CpG-specific linear models are first calculated using a reference bulk methylation matrix, which may contain some missing values.
 From our findings so far, using single tissue or single cell-type datasets is preferred to improve prediction accuracy,
-although multi-tissue datasets may also be used for training.
+although multi-tissue datasets may also be used for training with reasonable predictive accuracy.
 
-I provide a pre-computed training reference dataset for C57BL/6J mice livers inside of the `train` directory, and I will add other tissues shortly.
+I provide pre-computed liver, blood, and multi-tissue training reference datasets for C57BL/6J mice inside of the `train` directory.
 
 In order to train a custom set of linear models from a given DNAm matrix, run:
 
@@ -77,15 +91,14 @@ where:
 
 This function takes as input a pandas dataframe DNAm matrix, with rows as samples and columns as CpGs (in the form chr9_85324737). <br>
 Methylation values must be in the range from 0 (fully unmethylated) to 1 (fully methylated). <br>
-This dataframe must contain an "Age" column, which is used to compute correlations and linear regressions. <br>
+This dataframe must also contain an "Age" column, which is used to compute correlations and linear regressions. <br>
 An example bulk matrix of C57BL/6J mice livers is provided in the `bulk` directory <br>
 
 
 ## Loading single-cell methylomes
 scAge requires binary methylation matrices as input for the core epigenetic age profiling algorithm. These binary matrices can be obtained
 by processing existing .cov files produced by [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/) with our function
-`process_coverage`. However, there are other tools to process FASTQ bisulfite sequencing data, such as [BSSeeker](https://github.com/BSSeeker/BSseeker2) and [methylpy](https://github.com/yupenghe/methylpy). Final single-cell methylome files may have slightly different formats. The Bismark .cov file format is the following
-(the columns are not named in the files):
+`process_coverage`. However, there are other tools to process FASTQ bisulfite sequencing data, such as [BSSeeker](https://github.com/BSSeeker/BSseeker2) and [methylpy](https://github.com/yupenghe/methylpy). Therefore, final single-cell methylome files may have slightly different formats depending on the tool used. The Bismark .cov file format is the following (the columns are not named in the files):
 
 Chromosome | Position 1 | Position 2 | Methylation level | Methylated counts | Unmethylated counts
 :---: | :---: | :---: | :---: | :---: | :---: 
