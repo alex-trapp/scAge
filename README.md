@@ -93,9 +93,7 @@ In the case of the [Gravina et al. 2016 study](https://genomebiology.biomedcentr
 
 ## Speed, Memory and Parallelization
 
-The three functions described below, `construct_reference`, `process_coverage` and `run_scAge` are fully functional running on a single core, but experience
-linear speedup when multiprocessing is applied. Depending on your hardware specifications, it is recommended to increase the number of cores (`n_cores`) 
-to improve the speed and efficiency of the pipeline. 
+The three functions described below, `construct_reference`, `process_coverage` and `run_scAge` are fully functional running on a single core (the default is `n_cores` = 1). However, they all experience linear speedup when multiprocessing is applied. Depending on your hardware specifications, it is recommended to increase the number of cores (`n_cores`) to improve the speed and efficiency of the pipeline. In my testing, I used `n_cores` = 30.
 
 `process_coverage` and `run_scAge` can consume a lot of RAM depending on how many cells are being processed simulatenously, so it is recommended to observe processes and memory allocation (i.e. via `htop`) when running the algorithms for the first time with new parameters/cells. 
 
