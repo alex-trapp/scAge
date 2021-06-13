@@ -80,7 +80,7 @@ Chromosome | Position 1 | Position 2 | Methylation level | Methylated counts | U
 11 | 3101286 | 3101286 | 0 | 0 | 2
 
 Different file formats may require slightly modifying the function provided. 
-In the end, scAge requires a .tsv file or pandas datraframe with two columns, shown below. <br>
+In the end, scAge requires a .tsv file or pandas datraframe with two columns, shown below. <br><br>
 `ChrPos` should be in the form chr_position (i.e. chr1_3037802), while `MetLev` should be binary (0 or 1).
 
 ChrPos | MetLev
