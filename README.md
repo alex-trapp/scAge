@@ -74,8 +74,7 @@ Required data to run these example scripts is provided:
 * Raw bulk data for C56BL/6J liver samples used to construct reference models is located in `bulk`
 * Processed reference matrices (produced by running `construct_reference` on raw bulk DNAm data) for liver, blood, and multi-tissue datasets are located in `train`
 
-The functions driving scAge are explained and documented below, as well as thoroughly documented and commented in the source code of scAge.py. Default
-values are shown (`n_cores = `)
+The functions driving scAge are explained and documented below, as well as thoroughly documented and commented in the source code of scAge.py.
 
 ## Data
 
