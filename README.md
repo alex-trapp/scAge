@@ -2,9 +2,10 @@
 # scAge
 
 scAge is a probabilistic framework for epigenetic age profiling at single-cell resolution, developed in Python. <br> <br>
-This tool leverages the relationship between methylation at some CpGs in the DNA of bulk samples and chronological age to perform
+This tool leverages the relationship between DNA methylation in bulk samples and chronological age to perform
 probability-based profiling of epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
-This approach is both scalable and flexible. It can be used on any number of cells and trained on any desired methylation-age dataset. <br> <br>
+This approach constitutes the first available single-cell clock, and is both highly scalable and flexible. It can be used on any number
+of cells and can be trained on any methylation-age dataset. <br> <br>
 To learn more about the underlying algorithms driving scAge, please consult our [preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
 
 ## Installation
