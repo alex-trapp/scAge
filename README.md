@@ -31,13 +31,13 @@ In order to use the functions provided in scAge, the following packages need to 
 `sklearn` (developed with version 0.24.2) <br>
 `tqdm` (developed with version 4.60.0) <br>
 
-We also recommend `seaborn` and `matplotlib` to visualized epigenetic age predictions in Python. If desired, predicted epigenetic age output files
-can also be analyzed in other programming languages (i.e. R).
+We also recommend `seaborn` and `matplotlib` to visualize epigenetic age predictions in Python. If desired, predicted epigenetic age output files
+can also be analyzed in other environment (i.e. R).
 
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
 
 3 example Jupyter notebooks are provided in the `examples/notebooks` directory: <br>
-* `process_coverage_notebook.ipynb` --> processing .cov files from Bismark into processed binary methylation matrices <br>
+* `process_coverage_notebook.ipynb` --> processing .cov/.cov.gz files from Bismark into processed binary methylation matrices <br>
 * `construct_reference_notebook.ipynb` --> constructing a reference set of linear models from a bulk methylation matrix <br>
 * `example_run_scAge_notebook.ipynb` --> predicting epigenetic age in single cells <br>
 
@@ -45,18 +45,20 @@ These notebooks use a sample of cells from the [Gravina et al. study](https://ge
 described in Figure 2 of our manuscript. <br>
 Required data to run these example scripts is provided:
 * Raw .cov files of single-cell methylomes are located in `sc_data_raw`
-* Processed binary methylation matrices are located in `sc_data_processed`
+* Processed binary methylation matrices (produced by running `process_coverage` on raw .cov.gz files) are located in `sc_data_processed`
 * Raw bulk data for liver used to construct reference models is located in `bulk`
-* Processed reference matrix for liver is located in `train`
+* Processed reference matrix (produced by running `construct_reference` on raw bulk DNAm data) for liver is located in `train`
 
-The functions driving scAge are explained and documented below. Default values for parameters are shows (i.e. `cores = 30`)
+The functions driving scAge are explained and documented below, as well as deeply documented in the source code of scAge.py. <br>
+Default values for parameters in all functions are shown (i.e. `n_cores = 30`). The best values for some parameters (`cores`, `chunksize`)
+will depend on your hardware specifications.
 
 ## Training
 CpG-specific linear models are first calculated using a reference bulk methylation matrix, which may contain some missing values.
-From our findings, using single tissue or single cell-type datasets is preferred to improve prediction accuracy,
+From our findings so far, using single tissue or single cell-type datasets is preferred to improve prediction accuracy,
 although multi-tissue datasets may also be used for training.
 
-I provide a pre-computed training reference dataset for C57BL/6J mice livers inside of the `train` directory, and I will add more shortly.
+I provide a pre-computed training reference dataset for C57BL/6J mice livers inside of the `train` directory, and I will add other tissues shortly.
 
 In order to train a custom set of linear models from a given DNAm matrix, run:
 
@@ -67,7 +69,7 @@ construct_reference(training_DNAm_matrix,
                     chunksize = 100)
 ```
 
-where
+where:
 * `training_DNAm_matrix` --> input bulk methylation matrix <br>
 * `output_path` --> desired full path to the output reference matrix (/path/to/file.tsv) <br>
 * `n_cores` --> number of cores to use via parallel processing <br>
@@ -92,11 +94,11 @@ Chromosome | Position 1 | Position 2 | Methylation level | Methylated counts | U
 
 Native support for a variety of input formats will be added shortly. For now, I recommend processing single-cell methylation data with [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/) or converting existing methylation data to a Bismark format (shown above). <br> <br>
 
-Most of the publicly available data that we used for our study was in the .cov format, including data from [Hernando-Herraez et al](https://www.nature.com/articles/s41467-019-12293-4), [Angermueller et al.](https://www.nature.com/articles/nmeth.3728) and [Smallwood et al.](https://www.nature.com/articles/nmeth.3035). The sequencing data from the [Gravina et al.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3) study was also processed via the Bismark pipeline. Processed methylation data from the [Argelaguet et al.](https://www.nature.com/articles/s41586-019-1825-8) 
+Most of the publicly available data used in our study were in the .cov format, including data from [Hernando-Herraez et al](https://www.nature.com/articles/s41467-019-12293-4), [Angermueller et al.](https://www.nature.com/articles/nmeth.3728) and [Smallwood et al.](https://www.nature.com/articles/nmeth.3035). The sequencing data from the [Gravina et al.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3) study was also processed via the Bismark pipeline. Processed methylation data from the [Argelaguet et al.](https://www.nature.com/articles/s41586-019-1825-8) 
 contained the same information as .cov files, but the columns were labeled and in a different order. These files were handled separately to produce
-the required format for scAge, described below <br><br>
+the required format for scAge. <br><br>
 
-Ultimately, scAge requires a .tsv file or pandas datraframe with two columns, shown below. <br><br>
+Ultimately, scAge requires a .tsv file or pandas datraframe formatted with two columns, shown below. <br><br>
 `ChrPos` should be in the form chr_position (i.e. chr1_3037802), while `MetLev` should be binary (0 or 1).
 
 ChrPos | MetLev
@@ -117,7 +119,7 @@ process_coverage(cov_directory,
                  output_path = None):
 ```
 
-where
+where:
 * `cov_directory` --> path to the directory where .cov single-cell methylation files are stored <br>
 * `n_cores` --> number of cores to use for parallel processing <br>
 * `maxmet` --> maximum methylation value (normally, methylation ratios of Bismark-generated files range from 0 to 100) <br>
@@ -151,14 +153,14 @@ scAge.run_scAge(single_cell_dir_or_dict,
                 chunksize = 1)
 ```
 
-where
+where:
 * `single_cell_dir_or_dict` --> full path to a directory OR a dictionary of processed single-cell methylomes, created with `process_coverage`
 * `single_cell_set_name` --> desired name of the scAge run (i.e. 'dataset_x')
 * `reference_data` --> full path to the reference regression matrix created with `create_reference`
 * `selection_mode` --> one of `percentile` (default), `numCpGs`, `cutoff`, which determines which CpG selection mode should be used in the algorithm.
-I recommend `percentile` mode, which selects the most highly-correlated CpGs while account for differential coverage between cells. Alternatively,
+I recommend `percentile` mode, which selects the most highly-correlated CpGs while accounting for differential coverage between cells. Alternatively,
 a defined number of CpGs can be chosen using `numCpGs` mode, or a cutoff based on Pearson correlation can be set with `cutoff` 
-(where only CpGs with |r| ≥ threshold are selected).
+(where only CpGs with |r| ≥ threshold are selected for the algorithm).
 * `CpG_parameter` --> parameter accompanying selection mode 
 (1 in percentile mode --> top 1% age-correlated CpGs) <br>
 (500 in numCpGs mode --> top 500 age-correlated CpGs) <br>
@@ -168,16 +170,16 @@ a defined number of CpGs can be chosen using `numCpGs` mode, or a cutoff based o
 * `min_age` --> minimum age for probability computations
 * `max_age` --> maximum age for probability computations
 * `age_step` --> step for probability computations (i.e. if age_step == 1, likelihoods will be calculated for every 1 month between `min_age` and `max_age`)
-* `n_cores` --> number of cores that should be used for parallelization
-* `uncertainty` --> the uncertainty metric that should be used to compute upper and lower bounds (higher value results in a wider interval)
+* `n_cores` --> number of cores that should be used for parallel processing
+* `uncertainty` --> the uncertainty metric that should be used to compute upper and lower bounds (higher value result in a wider interval)
 * `output_path` --> full path to the directory where predictions and the report file should be written to
 * `chunksize` --> number of single-cell methylomes that should be passed to each parallel worker at once
 
 The output of run_scAge is a .tsv matrix, which contains a number of columns detailing the internal computations of the algorithm.
 The leftmost columns are the most critical, including: 
-* `PredictedAge` --> scDNAm epigenetic age predictions in the unit of the training data (in our case, months)
+* `PredictedAge` --> scDNAm epigenetic age predictions in the units of the training data (in our case, months)
 * `MeanMet` --> mean global methylation of the single cell (which we show is related to epigenetic age in some cell types)
-* `CellCoverage` --> number of CpGs covered in the single cell (which can be used to filter predictions)
+* `CellCoverage` --> number of CpGs covered in the single cell (which can be used to filter predictions based on low coverage)
 
 An example output file is shown below:
 
