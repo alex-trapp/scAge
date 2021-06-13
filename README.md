@@ -2,16 +2,24 @@
 # scAge
 
 scAge is a probabilistic framework for profiling epigenetic age at single-cell resolution, developed in Python. <br> <br>
-This tool leverages the relationship between DNA methylation in bulk samples and chronological age to perform
-probability-based profiling of epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
-This approach constitutes the first single-cell clock method, and is both highly scalable and flexible. <br> <br> 
-It can be used on any number of cells and can be trained on any methylation-age dataset. <br> <br>
+This tool, the first available single-cell clock, leverages the relationship between DNA methylation in bulk samples and chronological age to predict
+epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
+This approach is both scalable and flexible.
+It can be used on any number of cells and may be trained on any methylation-age dataset. <br> <br>
 To learn more about the underlying algorithms driving scAge, please consult the [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
 
 ```
 Profiling epigenetic age in single cells
 Alexandre Trapp, Csaba Kerepesi, Vadim N. Gladyshev
 bioRxiv 2021.03.13.435247; doi: https://doi.org/10.1101/2021.03.13.435247
+```
+
+For additional information on the rejuvenation event discussed in this paper, please consult:
+
+```
+Epigenetic clocks reveal a rejuvenation event during embryogenesis followed by aging
+Csaba Kerepesi, Bohan Zhang, Sang-Goo Lee, Alexandre Trapp, Vadim N. Gladyshev
+bioRxiv 2021.03.11.435028; doi: https://doi.org/10.1101/2021.03.11.435028
 ```
 
 ## Installation
@@ -45,6 +53,8 @@ In order to use the functions provided in scAge, the following packages need to 
 
 We also recommend installing `seaborn`, `matplotlib` and `statannot` to visualize epigenetic age predictions in Python.<br>
 Predicted epigenetic age output files are written as .tsv files, and can therefore also be analyzed in any other environment (i.e. R).
+
+This tool was developed in an Anaconda enviornment, running on Ubuntu 16.04.6 LTS.
 
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
 
