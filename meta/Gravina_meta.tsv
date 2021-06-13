@@ -1,0 +1,48 @@
+Run	Sample Name	Tissue	Age(str)	Age(num)	Type	Animal	Tissue-Age
+SRR3136624	f11	MEF			singleCell	f1	MEF
+SRR3136625	f23	MEF			singleCell	f2	MEF
+SRR3136626	f22	MEF			singleCell	f2	MEF
+SRR3136627	f21	MEF			singleCell	f2	MEF
+SRR3136628	o11	Hepatocyte	26 month	26.0	singleCell	o1	"Hepatocyte
+(26 month)"
+SRR3136629	o12	Hepatocyte	26 month	26.0	singleCell	o1	"Hepatocyte
+(26 month)"
+SRR3136630	o13	Hepatocyte	26 month	26.0	singleCell	o1	"Hepatocyte
+(26 month)"
+SRR3136631	o21	Hepatocyte	26 month	26.0	singleCell	o2	"Hepatocyte
+(26 month)"
+SRR3136634	f12	MEF			singleCell	f1	MEF
+SRR3136635	o22	Hepatocyte	26 month	26.0	singleCell	o2	"Hepatocyte
+(26 month)"
+SRR3136646	o15	Hepatocyte	26 month	26.0	singleCell	o1	"Hepatocyte
+(26 month)"
+SRR3136647	o31	Hepatocyte	26 month	26.0	singleCell	o3	"Hepatocyte
+(26 month)"
+SRR3136651	o16	Hepatocyte	26 month	26.0	singleCell	o1	"Hepatocyte
+(26 month)"
+SRR3136652	o32	Hepatocyte	26 month	26.0	singleCell	o3	"Hepatocyte
+(26 month)"
+SRR3136653	o14	Hepatocyte	26 month	26.0	singleCell	o1	"Hepatocyte
+(26 month)"
+SRR3136654	y11	Hepatocyte	4 month	4.0	singleCell	y1	"Hepatocyte
+(4 month)"
+SRR3136655	y13	Hepatocyte	4 month	4.0	singleCell	y1	"Hepatocyte
+(4 month)"
+SRR3136656	y16	Hepatocyte	4 month	4.0	singleCell	y1	"Hepatocyte
+(4 month)"
+SRR3136657	y22	Hepatocyte	4 month	4.0	singleCell	y2	"Hepatocyte
+(4 month)"
+SRR3136658	y12	Hepatocyte	4 month	4.0	singleCell	y1	"Hepatocyte
+(4 month)"
+SRR3136659	y21	Hepatocyte	4 month	4.0	singleCell	y2	"Hepatocyte
+(4 month)"
+SRR3136660	y14	Hepatocyte	4 month	4.0	singleCell	y1	"Hepatocyte
+(4 month)"
+SRR3136661	y32	Hepatocyte	4 month	4.0	singleCell	y3	"Hepatocyte
+(4 month)"
+SRR3136662	y33	Hepatocyte	4 month	4.0	singleCell	y3	"Hepatocyte
+(4 month)"
+SRR3136663	y15	Hepatocyte	4 month	4.0	singleCell	y1	"Hepatocyte
+(4 month)"
+SRR3136664	y31	Hepatocyte	4 month	4.0	singleCell	y3	"Hepatocyte
+(4 month)"
