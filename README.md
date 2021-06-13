@@ -169,3 +169,6 @@ at Harvard Medical School and Brigham and Women's Hospital. I want to acknowledg
 of the Gladyshev Lab for their input, particularly Csaba Kerepesi and Vadim Gladyshev for their
 contributions to the project, as well as Tiamat Fox and Adit Ganguly for their help with schematic
 design.
+
+This algorithm is covered by a provisional patent application filed by Brigham and Women's Hospital
+on 3/12/2021 which names Alexandre Trapp, Csaba Kerepesi, and Vadim Gladyshev as inventors.
