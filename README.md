@@ -14,7 +14,7 @@ Alexandre Trapp, Csaba Kerepesi, Vadim N. Gladyshev
 bioRxiv 2021.03.13.435247; doi: https://doi.org/10.1101/2021.03.13.435247
 ```
 
-For additional information on the rejuvenation event discussed in this paper, please consult:
+For additional information on the rejuvenation event discussed in the manuscript, please consult the [Kerepesi et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.11.435028v1):
 
 ```
 Epigenetic clocks reveal a rejuvenation event during embryogenesis followed by aging
@@ -50,14 +50,14 @@ In order to use the functions provided in scAge, the following packages need to 
 `scipy` (developed with version 1.6.3) <br>
 `sklearn` (developed with version 0.24.2) <br>
 `tqdm` (developed with version 4.60.0) <br>
+This tool was developed in an Anaconda environment, running on Ubuntu 16.04.6 LTS.
 
-We also recommend installing `seaborn`, `matplotlib` and `statannot` to visualize epigenetic age predictions in Python.<br>
-Predicted epigenetic age output files are written as .tsv files, and can therefore also be analyzed in any other environment (i.e. R).
+I also recommend installing `seaborn`, `matplotlib` and `statannot` to visualize epigenetic age predictions in Python.<br> <br>
+Predicted epigenetic age output dataframes are written to .tsv files, and can therefore also be analyzed in any other environment (i.e. R).
 
-This tool was developed in an Anaconda enviornment, running on Ubuntu 16.04.6 LTS.
-
+## Example notebooks
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
-
+ 
 3 example Jupyter notebooks detailing how to use the scAge tool are provided in the `notebooks` directory: <br>
 * `process_coverage_notebook.ipynb` --> processing .cov/.cov.gz files from Bismark into filtered binary methylation matrices <br>
 * `construct_reference_notebook.ipynb` --> constructing a reference set of linear models from a bulk methylation matrix <br>
