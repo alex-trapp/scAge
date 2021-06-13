@@ -196,12 +196,12 @@ def load_cov_file(args):
             cov.to_csv(write_path + cell + "-dis" + ".tsv", sep = "\t")
 
 def process_coverage(cov_directory,
+                     output_path = "./sc_data_processed/",
                      n_cores = 1,
                      max_met = 100,
                      split = ".",
                      chunksize = 1,
-                     binarization = "round",
-                     output_path = None):
+                     binarization = "round"):
     
     '''
     Summary:
