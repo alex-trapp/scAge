@@ -1,7 +1,7 @@
-scAge report for './predictions/Gravina_Test-train(Thompson_Liver_BL6)-mode(percentile)-param(top_1_pct).tsv'
-Files created: 06/13/2021 03:10:39
+scAge report for '../predictions/Gravina_Test-train(Thompson_Liver_BL6)-mode(percentile)-param(top_1_pct).tsv'
+Files created: 06/13/2021 15:02:50
 
-Methylation data loaded in from './sc_data_processed/'
+Methylation data loaded in from '../sc_data_processed/'
 Training dataset used: Thompson_Liver_BL6
 Selection mode: percentile
 CpG parameter: top 1% age-associated CpGs
@@ -12,4 +12,4 @@ Replacement for modeled bulk methylation below 0: 0.001
 Replacement for modeled bulk methylation above 1: 0.999
 Uncertainty parameter for confidence interval: +/- 1 
 
-Time to generate results: 23.223 seconds
+Time to generate results: 52.673 seconds

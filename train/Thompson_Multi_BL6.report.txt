@@ -1,0 +1,25 @@
+scAge reference report for Multi_BL6
+Reference file created: 06/08/2021 11:23:20
+
+Number of input samples = 196
+Number of input CpGs = 748,955
+Number of output CpGs (after dropping NA) = 748,951
+
+Tissue(s)
+Blood      50
+Muscle     30
+Adipose    30
+Liver      30
+Kidney     29
+Lung       27
+Name: Tissue, dtype: int64
+
+Strain(s)
+C57BL/6J    196
+Name: Strain, dtype: int64
+
+Sex(s)
+Male      100
+Female     96
+Name: Gender, dtype: int64
+
