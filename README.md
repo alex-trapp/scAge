@@ -1,11 +1,11 @@
 ![image](images/scAge_schematic_GitHub.jpg)
 # scAge
 
-scAge is a probabilistic framework for epigenetic age profiling at single-cell resolution, developed in Python. <br> <br>
+scAge is a probabilistic framework for profiling epigenetic age at single-cell resolution, developed in Python. <br> <br>
 This tool leverages the relationship between DNA methylation in bulk samples and chronological age to perform
 probability-based profiling of epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
-This approach constitutes the first available single-cell clock, and is both highly scalable and flexible. It can be used on any number
-of cells and can be trained on any methylation-age dataset. <br> <br>
+This approach constitutes the first available single-cell clock, and is both highly scalable and flexible. <br> <br> 
+It can be used on any number of cells and can be trained on any methylation-age dataset. <br> <br>
 To learn more about the underlying algorithms driving scAge, please consult our [preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
 
 ## Installation
@@ -34,43 +34,47 @@ In order to use the functions involved in scAge, the following packages need to 
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
 
 3 example Jupyter notebooks are provided in the `notebooks` directory: <br>
-* `example_process_coverage.ipynb` --> processing .cov files from Bismark into processed binary methylation matrices <br>
-* `example_construct_reference.ipynb` --> constructing a reference set of linear models from a bulk methylation matrix <br>
-* `example_run_scAge.ipynb` --> predicting epigenetic age in single cells <br>
+* `process_coverage_notebook.ipynb` --> processing .cov files from Bismark into processed binary methylation matrices <br>
+* `construct_reference_notebook.ipynb` --> constructing a reference set of linear models from a bulk methylation matrix <br>
+* `example_run_scAge_notebook.ipynb` --> predicting epigenetic age in single cells <br>
 
 These notebooks use a sample of cells from the [Gravina et al. study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3), described in Figure 2 of our manuscript. <br>
 Required data to run these example scripts is provided:
-* Raw .cov files of single-cell methylomes are provided in `sc_data_raw`
-* Processed binary methylation matrices are provided in `sc_data_processed`
-* Raw bulk data for liver used to construct reference models is provided in `bulk`
-* Processed reference matrix for liver is provided in `train`
+* Raw .cov files of single-cell methylomes are located in `sc_data_raw`
+* Processed binary methylation matrices are located in `sc_data_processed`
+* Raw bulk data for liver used to construct reference models is located in `bulk`
+* Processed reference matrix for liver is located in `train`
 
 Functions driving scAge are explained and documented below. Default values for parameters are shows (i.e. `cores = 30`)
 
-### Training
-CpG-specific linear models are first calculated using a reference bulk dataset, which may contain some missing values.
+## Training
+CpG-specific linear models are first calculated using a reference bulk methylation matrix, which may contain some missing values.
 Using single tissue or single cell-type datasets is preferred to improve prediction accuracy, although multi-tissue datasets
-can also be used for training.
+may also be used for training.
 
-We provide a pre-computed training reference dataset inside of the `train` directory.
+We provide a pre-computed training reference dataset for C57BL/6J mice inside of the `train` directory, and will add more shortly.
 
-In order to train a custom set of linear models from a given DNAm matrix, run
+In order to train a custom set of linear models from a given DNAm matrix, run\
+
 ```
 construct_reference(training_DNAm_matrix,
                     output_path,
                     n_cores = 30,
                     chunksize = 100)
 ```
-This function takes as input a pandas dataframe DNAm matrix, with rows as samples and columns as CpGs (in the form chr9_85324737). 
-Methylation values must be in the range from 0 (fully unmethylated) to 1 (fully methylated). <br>
-This dataframe must contain an "Age" column, which is used to compute correlations and linear regressions. <br>
-An example bulk matrix is provided in the `bulk` directory <br>
+
 * `training_DNAm_matrix` --> input bulk methylation matrix <br>
 * `output_path` --> desired full path output reference matrix <br>
 * `n_cores` --> number of cores to use via parallel processing <br>
 * `chunksize` --> number of individual CpG methylation series to distribute at once to each worker <br>
 
-### Loading single-cell methylomes
+This function takes as input a pandas dataframe DNAm matrix, with rows as samples and columns as CpGs (in the form chr9_85324737). 
+Methylation values must be in the range from 0 (fully unmethylated) to 1 (fully methylated). <br>
+This dataframe must contain an "Age" column, which is used to compute correlations and linear regressions. <br>
+An example bulk matrix of C57BL/6J mice livers is provided in the `bulk` directory <br>
+
+
+## Loading single-cell methylomes
 scAge requires binary methylation matrices as input for the core epigenetic age profiling algorithm. These binary matrices can be obtained
 by processing existing .cov files produced by [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/). Depending on the tool used,
 final single-cell methylome files may have slightly different formats. The Bismark .cov file format is the following:
@@ -164,7 +168,7 @@ SRR3136628 | 25.0 | 0.695256 | 2511084 | ... |
 ## Troubleshooting
 If you encounter any issue when trying to run scAge, please open a pull request <br> or contact me by email: alexandre.trapp1@gmail.com
 
-# Information and acknowledgments
+## Information and acknowledgments
 This software was developed by Alexandre Trapp, Technical Research Assistant in the Gladyshev Lab 
 at Harvard Medical School and Brigham and Women's Hospital. I want to acknowledge all the members
 of the Gladyshev Lab for their input, particularly Csaba Kerepesi and Vadim Gladyshev for their
