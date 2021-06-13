@@ -31,6 +31,9 @@ In order to use the functions provided in scAge, the following packages need to 
 `sklearn` (developed with version 0.24.2) <br>
 `tqdm` (developed with version 4.60.0) <br>
 
+We also recommend `seaborn` and `matplotlib` to visualized epigenetic age predictions in Python. If desired, predicted epigenetic age output files
+can also be analyzed in other programming languages (i.e. R).
+
 scAge is a workflow that enables epigenetic age prediction in single cells using a combination of linear models to estimate age.
 
 3 example Jupyter notebooks are provided in the `examples/notebooks` directory: <br>
