@@ -196,7 +196,7 @@ def load_cov_file(args):
             cov.to_csv(write_path + cell + "-dis" + ".tsv", sep = "\t")
 
 def process_coverage(cov_directory,
-                     n_cores = 10,
+                     n_cores = 1,
                      max_met = 100,
                      split = ".",
                      chunksize = 1,
@@ -343,7 +343,7 @@ def compute_linear_relationship(args):
 
 def construct_reference(training_DNAm_matrix,
                         output_path,
-                        n_cores = 30,
+                        n_cores = 1,
                         chunksize = 100):
     
     '''
@@ -681,6 +681,7 @@ def compute_probabilities(args):
 def run_scAge(single_cell_dir_or_dict,
               single_cell_set_name,
               reference_data,
+              output_path = "./predictions/",
               selection_mode = "percentile",
               CpG_parameter = 99,
               zero_met_replacement = 0.001,
@@ -690,7 +691,6 @@ def run_scAge(single_cell_dir_or_dict,
               age_step = 0.1,
               n_cores = 1,
               uncertainty = 1,
-              output_path = os.getcwd(),
               chunksize = 5):
     
     '''
