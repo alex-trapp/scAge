@@ -66,6 +66,17 @@ will depend on your hardware specifications. I recommend setting all the paramet
 ## Data
 
 All data from this study is publicly available from the [GEO database](https://www.ncbi.nlm.nih.gov/geo/) or the [SRA](https://www.ncbi.nlm.nih.gov/sra) <br>
+The table below summarize where the processed methylation data can be obtained:
+
+Study | GEO Accession |
+:---: | :---: |
+[Angermueller et al. 2016](https://www.nature.com/articles/nmeth.3728) | [GSE68642](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE68642) |
+[Hernando-Herraez et al. 2019](https://www.nature.com/articles/s41467-019-12293-4) | [GSE121436](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE121436) |
+[Smallwood et al. 2014](https://www.nature.com/articles/nmeth.3035) | [GSE56879](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE56879) |
+[Argelaguet et al. 2019](https://www.nature.com/articles/s41586-019-1825-8) | [GSE121690](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE121690) |
+
+In the case of the [Gravina et al. 2016](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3), no deposition of processed methylation data was made to GEO. I downloaded trimmed FASTQ files from SRA (accession [SRA344045](https://www.ncbi.nlm.nih.gov/Traces/study/?query_key=2&WebEnv=MCID_60c66f07420f4367b31414c9&o=acc_s%3Aa)) using the `fasterq-dump` from the SRA Toolkit and mapped them the mm10/GRCm38.p6 genome using [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/) v0.22.3 with the option `–non_directional`, as suggested by the [Bismark User Guide v0.21.0](https://rawgit.com/FelixKrueger/Bismark/master/Docs/Bismark_User_Guide.html) for Zymo Pico-Methyl scWGBS library preparations. Reads were subsequently deduplicated and methylation levels for CpG sites were extracted with Bismark.
+
 
 ## Training
 CpG-specific linear models are first calculated using a reference bulk methylation matrix, which may contain some missing values.
