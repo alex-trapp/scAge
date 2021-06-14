@@ -52,7 +52,7 @@ In order to use the functions provided in scAge, the following packages need to 
 `sklearn` (developed with version 0.24.2) <br>
 `tqdm` (developed with version 4.60.0) <br>
 
-This tool was developed in an Anaconda environment, running on Ubuntu 16.04.6 LTS.
+This tool was developed in Python 3.9.2 in an Anaconda environment, running on Ubuntu 16.04.6 LTS.
 
 I also recommend installing `seaborn`, `matplotlib` and `statannot` to visualize epigenetic age predictions in Python.
 
