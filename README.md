@@ -128,9 +128,9 @@ The input file format is shown below:
 
 Sample | chr9_85324737 | chr15_85673573 | ... | Age |
 :---: | :---: | :---: | :---: | :---: |
-GSM3394403  | 0.328125 | 0.717949 | ... | 2m |
-GSM3394378	| 0.512195 | 0.439024 | ... | 10m |
-GSM3394354	| 0.767857 | 0.333333 | ... | 20m |
+GSM3394403  | 0.328125 | 0.717949 | ... | 2 |
+GSM3394378	| 0.512195 | 0.439024 | ... | 10 |
+GSM3394354	| 0.767857 | 0.333333 | ... | 20 |
 
 An example compressed bulk HDF matrix of C57BL/6J mice livers is provided in the `bulk` directory <br>
 
