@@ -18,7 +18,8 @@ and can be executed with the following functions:
 For more details on the algorithm and how to run the functions, 
 please consult the GitHub page @ https://github.com/alex-trapp/scAge/
 
-Developed by Alexandre Trapp
+Developed by Alexandre Trapp in the Gladyshev Lab
+Copyright, Alexandre Trapp, 2021
 '''
 
 # import packages and check dependencies
