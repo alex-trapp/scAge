@@ -126,6 +126,13 @@ Methylation values must be in the range from 0 (fully unmethylated) to 1 (fully 
 This dataframe must also contain a numeric "Age" column, which is used to compute correlations and linear regression models. <br>
 An example compressed bulk HDF matrix of C57BL/6J mice livers is provided in the `bulk` directory <br>
 
+The output of this function is .tsv file with the following format:
+ChrPos | PearsonR | Pearson P | Coef | Intercept |
+:---: | :---: | :---: | :---: | :---: |
+chr9_85324737	 | 0.914574	 | 4.004872e-12 | 0.021272 | 0.292949 |
+chr15_85673573	| -0.924491 | 8.035884e-13 | -0.023755 | 0.671210 |
+chr1_3037820	| 0.066107 | 0.733323 | -0.000766 | 0.723581	|
+
 ## Loading single-cell methylomes
 
 scAge requires binary methylation matrices as input for the core epigenetic age profiling algorithm. These binary matrices can be obtained
