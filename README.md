@@ -126,11 +126,11 @@ Methylation values must be in the range from 0 (fully unmethylated) to 1 (fully 
 This dataframe must also contain a numeric "Age" column, which is used to compute correlations and linear regression models. <br>
 The input file format is shown below:
 
-Sample | chr1_3037820 | chr19_61305357 | ... | Age |
-:---: | :---: | :---: | :---: | :---: | :---: | 
-GSM3394354	 | 0.828571	 | 0.716981 | ... | 2m |
-GSM3394355	| 0.629630 | 0.653846 | ... | 10m |
-GSM3394356	| 0.768116 | 0.608696 | ... | 20m |
+Sample | chr9_85324737 | chr15_85673573 | ... | Age |
+:---: | :---: | :---: | :---: | :---: |
+GSM3394403  | 0.328125 | 0.717949 | ... | 2m |
+GSM3394378	| 0.512195 | 0.439024 | ... | 10m |
+GSM3394354	| 0.767857 | 0.333333 | ... | 20m |
 
 An example compressed bulk HDF matrix of C57BL/6J mice livers is provided in the `bulk` directory <br>
 
