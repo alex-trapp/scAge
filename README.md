@@ -124,9 +124,17 @@ where:
 This function takes as input a pandas DataFrame DNAm matrix, with rows as samples and columns as CpGs (in the form chr9_85324737). <br>
 Methylation values must be in the range from 0 (fully unmethylated) to 1 (fully methylated). <br>
 This dataframe must also contain a numeric "Age" column, which is used to compute correlations and linear regression models. <br>
+The input file format is shown below:
+
+Sample | chr1_3037820 | chr19_61305357 | ... | Age |
+:---: | :---: | :---: | :---: | :---: | :---: | 
+GSM3394354	 | 0.828571	 | 0.716981 | ... | 2m |
+GSM3394355	| 0.629630 | 0.653846 | ... | 10m |
+GSM3394356	| 0.768116 | 0.608696 | ... | 20m |
+
 An example compressed bulk HDF matrix of C57BL/6J mice livers is provided in the `bulk` directory <br>
 
-The output of this function is .tsv file with the following format:
+The output of this function is a .tsv file with the following format:
 ChrPos | PearsonR | Pearson P | Coef | Intercept |
 :---: | :---: | :---: | :---: | :---: |
 chr9_85324737	 | 0.914574	 | 4.004872e-12 | 0.021272 | 0.292949 |
