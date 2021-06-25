@@ -135,7 +135,7 @@ GSM3394354	| 0.767857 | 0.333333 | ... | 20 |
 An example compressed bulk HDF matrix of C57BL/6J mice livers is provided in the `bulk` directory <br>
 
 The output of this function is a .tsv file with the following format:
-ChrPos | PearsonR | Pearson P | Coef | Intercept |
+ChrPos | PearsonR | PearsonP | Coef | Intercept |
 :---: | :---: | :---: | :---: | :---: |
 chr9_85324737	 | 0.914574	 | 4.004872e-12 | 0.021272 | 0.292949 |
 chr15_85673573	| -0.924491 | 8.035884e-13 | -0.023755 | 0.671210 |
