@@ -1,7 +1,7 @@
 ![image](images/scAge_schematic_GitHub.jpg)
 # scAge
 
-scAge is a probabilistic framework for profiling epigenetic age at single-cell resolution, developed in Python. <br> <br>
+scAge is a framework for profiling epigenetic age at single-cell resolution, developed in Python. <br> <br>
 This tool, the first available single-cell clock, leverages the relationship between DNA methylation in bulk samples and chronological age to predict
 epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
 This approach is both scalable and flexible.
