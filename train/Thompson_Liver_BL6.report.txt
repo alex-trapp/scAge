@@ -1,0 +1,20 @@
+scAge reference report for Thompson_Liver_BL6
+Reference file created: 06/13/2021 14:44:29
+
+Number of input samples = 29
+Number of input CpGs = 748,955
+Number of output CpGs (after dropping NA) = 743,078
+
+Tissue(s)
+Liver    29
+Name: Tissue, dtype: int64
+
+Strain(s)
+C57BL/6J    29
+Name: Strain, dtype: int64
+
+Sex
+Male      15
+Female    14
+Name: Gender, dtype: int64
+
