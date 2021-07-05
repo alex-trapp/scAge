@@ -18,7 +18,8 @@ and can be executed with the following functions:
 For more details on the algorithm and how to run the functions, 
 please consult the GitHub page @ https://github.com/alex-trapp/scAge/
 
-Developed by Alexandre Trapp
+Developed by Alexandre Trapp in the Gladyshev Lab
+Copyright, Alexandre Trapp, 2021
 '''
 
 # import packages and check dependencies
@@ -147,6 +148,11 @@ def load_cov_file(args):
                       names = ["Chr", "Pos1", "Pos2", "MetLev", "Met", "Unmet"],
                       dtype={'Chr': 'str',
                              'Pos1' : 'str'})
+    
+    if "chr" in cov.iloc[0, 0]: # check for if column is labeled "chr15" instead of "15"
+        cov['Chr'] = cov['Chr'].str.replace('chr', '')
+    
+    
     # filter autosomes
     cov = cov[cov["Chr"].isin(autosome_list)]
     
@@ -668,7 +674,7 @@ def compute_probabilities(args):
     # compute single-cell characteristics
     mean_met = single_cell_met["MetLev"].mean()
     coverage = len(single_cell_met)
-    num_intersections = len(ref_sc_intersect_df_subset)
+    num_intersections = len(ref_sc_intersect_df)
     
     # return tuple output
     probabilities_output = (single_cell_name, max_probability_age,
