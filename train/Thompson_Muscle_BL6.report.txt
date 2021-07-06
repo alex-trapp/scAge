@@ -1,0 +1,19 @@
+scAge reference report for Muscle_BL6
+Reference file created: 06/08/2021 11:51:23
+Number of input samples = 24
+Number of input CpGs = 748,955
+Number of output CpGs (after dropping NA) = 702,479
+
+Tissue(s)
+Muscle    24
+Name: Tissue, dtype: int64
+
+Strain(s)
+C57BL/6J    24
+Name: Strain, dtype: int64
+
+Sex(s)
+Female    13
+Male      11
+Name: Gender, dtype: int64
+
