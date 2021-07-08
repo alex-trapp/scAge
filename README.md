@@ -14,7 +14,7 @@ Alexandre Trapp, Csaba Kerepesi, Vadim N. Gladyshev
 bioRxiv 2021.03.13.435247; doi: https://doi.org/10.1101/2021.03.13.435247
 ```
 
-For additional information on the rejuvenation event discussed in the manuscript, please consult the [Kerepesi et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.11.435028v1):
+For additional information on the rejuvenation event discussed in the manuscript, please consult the [Kerepesi et al. paper published in Science Advances](https://advances.sciencemag.org/content/7/26/eabg6082):
 
 ```
 Epigenetic clocks reveal a rejuvenation event during embryogenesis followed by aging
