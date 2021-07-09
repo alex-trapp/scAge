@@ -200,6 +200,7 @@ def load_cov_file(args):
             cov.to_csv(write_path + cell + ".tsv", sep = "\t")
         elif binarization == "discard":  
             cov.to_csv(write_path + cell + "-dis" + ".tsv", sep = "\t")
+    del cov
 
 def process_coverage(cov_directory,
                      output_path = "./sc_data_processed/",
