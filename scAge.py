@@ -250,6 +250,9 @@ def process_coverage(cov_directory,
     print("Loading .cov files from '%s'" % cov_directory)
     cov_list = sorted(os.listdir(cov_directory))
     print("Number of Bismark .cov files = %s" % len(cov_list))
+    for file in cov_list:
+        if file == ".ipynb_checkpoints":
+            cov_list.remove(file)
     print("First .cov file name: '%s'" % cov_list[0])
     print("----------------------------------------------------------\n")
 
