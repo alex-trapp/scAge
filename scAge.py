@@ -761,7 +761,9 @@ def run_scAge(single_cell_dir_or_dict,
         single_cell_cov_dir = single_cell_dir_or_dict
         print("Loading processed binary methylation files from '%s'..." % single_cell_cov_dir)
         single_cell_files = sorted(os.listdir(single_cell_cov_dir))
-        
+        for file in single_cell_files:     
+            if file == ".ipynb_checkpoints":
+                single_cell_files.remove(file)
         # check if files are gzipped
         if ".gz" in single_cell_files[0]:
             add_gz = True
