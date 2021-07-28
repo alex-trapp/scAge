@@ -1,5 +1,5 @@
 '''
-scAge v1.0 (7/9/2021)
+scAge v1.0 (7/28/2021)
 
 scAge is a flexible framework for epigenetic age predictions in single cells.
 For more information on the algorithm, please consult Trapp et al., bioRxiv (2021).
