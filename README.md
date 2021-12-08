@@ -280,5 +280,5 @@ of the Gladyshev Lab for their input, particularly Csaba Kerepesi and Vadim Glad
 contributions to the project, as well as Tiamat Fox and Adit Ganguly for their help with schematic
 design.
 
-This algorithm is covered by a provisional patent application filed by Brigham and Women's Hospital
-on 3/12/2021 which names Alexandre Trapp, Csaba Kerepesi, and Vadim Gladyshev as inventors.
+A provisional patent application was filed by Brigham and Women's Hospital
+on 3/12/2021 which names Alexandre Trapp, Csaba Kerepesi, and Vadim Gladyshev as inventors of this work.
