@@ -4,10 +4,10 @@
 scAge is a framework for profiling epigenetic age at single-cell resolution, developed entirely in Python. <br> <br>
 This tool, the first available single-cell clock, inherently leverages the relationship between DNA methylation in bulk samples and chronological age to predict
 epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
-This computational platform is both massively scalable and deeply flexible.
-It can be used on any number of cells, and may be trained on any methylation-age dataset. <br> <br>
+This computational platform is both highly scalable and deeply flexible.
+It can be used on any number of cells, and may be trained on any methylation-age dataset. <br>
 
-To learn more about scAge, please consult the [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1).
+To learn more about scAge, please consult the [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1):
 
 ```
 Profiling epigenetic age in single cells
@@ -16,12 +16,16 @@ bioRxiv 2021.03.13.435247
 ```
 
 Remarkably, the scAge framework can also be applied to shallow methylation sequencing data, allowing for dramatic sequencing cost reduction.
-To learn more about this application to low-pass data, please consult the other [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.25.465778v1)
+To learn more about this application to low-pass data, please consult the other [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.25.465778v1), as well as [Patrick Griffin's excellent TIME-Seq preprint](https://www.biorxiv.org/content/10.1101/2021.10.25.465725v1):
 
 ```
 Cost-effective epigenetic age profiling in shallow methylation sequencing data
 Alexandre Trapp & Vadim N. Gladyshev
 bioRxiv 2021.10.25.465778
+
+Ultra-cheap and scalable epigenetic age predictions with TIME-Seq
+Patrick Griffin, Alice Kane, Alexandre Trapp, Jien Li, Maeve McNamara, Margarita Meer, Michael R MacArthur, Sarah J Mitchell, Amber Mueller, Colleen Carmody, Daniel Vera, Csaba Kerepesi, Nicole Noren Hooten, James R Mitchell, Michele Evans, Vadim N Gladyshev, David A Sinclair
+bioRxiv 2021.10.25.465725
 ```
 
 To learn more about the rejuvenation event discussed in the manuscript, please consult the [Kerepesi et al. paper published in Science Advances](https://advances.sciencemag.org/content/7/26/eabg6082), which analyzed embryonic epigenetic dynamics at the bulk level:
