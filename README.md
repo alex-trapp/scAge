@@ -22,7 +22,9 @@ To learn more about this application to low-pass data, please consult the other 
 Cost-effective epigenetic age profiling in shallow methylation sequencing data
 Alexandre Trapp & Vadim N. Gladyshev
 bioRxiv 2021.10.25.465778
+```
 
+```
 Ultra-cheap and scalable epigenetic age predictions with TIME-Seq
 Patrick Griffin, Alice Kane, Alexandre Trapp, Jien Li, Maeve McNamara, Margarita Meer, Michael R MacArthur, Sarah J Mitchell, Amber Mueller, Colleen Carmody, Daniel Vera, Csaba Kerepesi, Nicole Noren Hooten, James R Mitchell, Michele Evans, Vadim N Gladyshev, David A Sinclair
 bioRxiv 2021.10.25.465725
@@ -39,13 +41,13 @@ Science Advances 7(26), 10.1126/sciadv.abg6082
 
 ## Installation
 
-To install scAge and associated data, please download or clone the GitHub repository:
+For now, to install scAge and associated data, please clone the GitHub repository:
 
 `git clone https://github.com/alex-trapp/scAge.git`
 
 This will download all required data to utilize and test the software. <br>
 
-For ease of use, all functions needed to run the full scAge pipeline are directly included within scAge.py.
+For ease of use, all functions needed to run the full scAge pipeline are directly included within the script scAge.py.
 
 A `pip` package version of the framework will be released shortly.
 
