@@ -85,7 +85,7 @@ A set of 3 example Jupyter notebooks detailing how to use the scAge tool are pro
 * `run_scAge_notebook.ipynb` --> predicting epigenetic age in single cells, using binary single-cell matrices and the precomputed reference set <br>
 
 These notebooks use all the murine single cells from the [Gravina et al. 2016 study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3),
-described in depth in Figure 2 of our manuscript. This includes 11 hepatocytes from young livers (4-month-old), 10 hepatocytes from old livers (26-month-old), and 5 mouse embryonic fibroblasts (MEFs). Of note, two cells (one young fibroblast and one old fibroblast) show abberant clustering profiles using dimensionality reduction approaches [see Figure 2 of their paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3/figures/2), and also have high predicted epigenetic ages. We suppose these cells may be senescent, but may also simply be technical artifacts.
+described in depth in Figure 2 of our manuscript. This includes 11 hepatocytes from young livers (4-month-old), 10 hepatocytes from old livers (26-month-old), and 5 mouse embryonic fibroblasts (MEFs). Of note, two cells (one young fibroblast and one old fibroblast) show abberant clustering profiles using dimensionality reduction approaches ([see Figure 2c of their paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3/figures/2)). These cells also have high predicted epigenetic ages. We suppose these cells may be senescent, but these results may also simply be due to technical artifacts.
 
 All the required data to run these example scripts is provided in this repository:
 * Single-cell methylation coverage files (.cov.gz) are located in `sc_data_raw`
