@@ -28,7 +28,7 @@ bioRxiv 2021.10.25.465778
 Ultra-cheap and scalable epigenetic age predictions with TIME-Seq
 Patrick Griffin, Alice Kane, Alexandre Trapp, Jien Li, Maeve McNamara, Margarita Meer,
 Michael MacArthur, Sarah Mitchell, Amber Mueller, Colleen Carmody, Daniel Vera,
-Csaba Kerepesi, Nicole Noren Hooten, James Mitchell, Michele Evans, Vadim N. Gladyshev, David A. Sinclair
+Csaba Kerepesi, Nicole Noren Hooten, James Mitchell, Michele Evans, Vadim N. Gladyshev & David A. Sinclair
 bioRxiv 2021.10.25.465725
 ```
 
