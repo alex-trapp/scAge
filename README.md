@@ -1,13 +1,13 @@
 ![image](images/scAge_schematic_GitHub.jpg)
 # scAge
 
-scAge is a framework for profiling epigenetic age at single-cell resolution, developed entirely in Python. <br> <br>
+<b>scAge</b> is a framework for profiling epigenetic age at single-cell resolution, developed entirely in Python. <br> <br>
 This tool, the first available single-cell clock, inherently leverages the relationship between DNA methylation in bulk samples and chronological age to predict
 epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
 This computational platform is both highly scalable and deeply flexible.
 It can be used on any number of cells, and may be trained on any methylation-age dataset. <br>
 
-To learn more about scAge, please consult the [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1):
+To learn more about <b>scAge</b>, please consult the [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1):
 
 ```
 Profiling epigenetic age in single cells
@@ -15,7 +15,7 @@ Alexandre Trapp, Csaba Kerepesi & Vadim N. Gladyshev
 bioRxiv 2021.03.13.435247
 ```
 
-Remarkably, the scAge framework can also be applied to shallow methylation sequencing data, allowing for dramatic sequencing cost reduction.
+Remarkably, the <b>scAge</b> framework can also be applied to shallow methylation sequencing data, allowing for dramatic cost-effectiveness in regard to sequencing.
 To learn more about this application to low-pass data, please consult the other [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.25.465778v1), as well as [Patrick Griffin's excellent TIME-Seq preprint](https://www.biorxiv.org/content/10.1101/2021.10.25.465725v1):
 
 ```
@@ -26,7 +26,9 @@ bioRxiv 2021.10.25.465778
 
 ```
 Ultra-cheap and scalable epigenetic age predictions with TIME-Seq
-Patrick Griffin, Alice Kane, Alexandre Trapp, Jien Li, Maeve McNamara, Margarita Meer, Michael R MacArthur, Sarah J Mitchell, Amber Mueller, Colleen Carmody, Daniel Vera, Csaba Kerepesi, Nicole Noren Hooten, James R Mitchell, Michele Evans, Vadim N Gladyshev, David A Sinclair
+Patrick Griffin, Alice Kane, Alexandre Trapp, Jien Li, Maeve McNamara, Margarita Meer,
+Michael MacArthur, Sarah Mitchell, Amber Mueller, Colleen Carmody, Daniel Vera,
+Csaba Kerepesi, Nicole Noren Hooten, James Mitchell, Michele Evans, Vadim N. Gladyshev, David A. Sinclair
 bioRxiv 2021.10.25.465725
 ```
 
@@ -41,19 +43,19 @@ Science Advances 7(26), 10.1126/sciadv.abg6082
 
 ## Installation
 
+A `pip` package version of the framework will be released shortly.
+
 For now, to install scAge and associated data, please clone the GitHub repository:
 
 `git clone https://github.com/alex-trapp/scAge.git`
 
 This will download all required data to utilize and test the software. <br>
 
-For ease of use, all functions needed to run the full scAge pipeline are directly included within the script scAge.py.
-
-A `pip` package version of the framework will be released shortly.
+For ease of use, all functions needed to run the full scAge pipeline are directly included within the `scAge.py` script.
 
 ## Usage
 
-To run scAge, first add the directory containing scAge.py to your path, then import scAge into a Python script or Jupyter notebook:
+To run <b>scAge</b>, first add the directory containing scAge.py to your path, then import scAge into a Python script or Jupyter notebook:
 
 ```
 import sys
@@ -61,19 +63,19 @@ sys.path.append('/path/to/dir') # where dir is a directory containing scAge.py
 import scAge
 ```
 
-In order to use the functions provided in scAge, the following packages need to be installed:
+In order to use the functions provided in <b>scAge</b>, the following packages need to be installed:
 
-`numpy` (developed with version 1.20.2) <br>
-`pandas` (developed with version 1.2.4) <br>
-`scipy` (developed with version 1.6.3) <br>
-`sklearn` (developed with version 0.24.2) <br>
-`tqdm` (developed with version 4.60.0) <br>
+`numpy` (tested with version 1.20.2) <br>
+`pandas` (tested with version 1.2.4) <br>
+`scipy` (tested with version 1.6.3) <br>
+`sklearn` (tested with version 0.24.2) <br>
+`tqdm` (tested with version 4.60.0) <br>
 
 This tool was developed in Python 3.9.2 in an Anaconda environment, running on Ubuntu 16.04.6 LTS.
 
-To visualize epigenetic age predictions, installation of `seaborn`, `matplotlib` and `statannot` is recommended.
+To visualize epigenetic age predictions, installation of `seaborn`, `matplotlib` and `statannot` is also recommended.
 
-Predicted epigenetic age output dataframes are conveniently written to .tsv files, and can therefore also be analyzed in any other environment (i.e. R).
+Predicted epigenetic age output dataframes are conveniently written to .tsv files, and can therefore also be analyzed in any other environment (R, Excel, etc...).
 
 ## Example notebooks
 
@@ -83,15 +85,15 @@ A set of 3 example Jupyter notebooks detailing how to use the scAge tool are pro
 * `run_scAge_notebook.ipynb` --> predicting epigenetic age in single cells, using binary single-cell matrices and the precomputed reference set <br>
 
 These notebooks use all the murine single cells from the [Gravina et al. 2016 study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3),
-described in depth in Figure 2 of our manuscript. This includes 11 hepatocytes from young livers (4-month-old), 10 hepatocytes from old livers (26-month-old), and 5 mouse embryonic fibroblasts (MEFs). Of note, two cells (one young fibroblast and one old fibroblast) show abberant clustering profiles using PCA (see original Gravina et al study), and also have high predicted epigenetic ages. We suppose these cells may be senescent, or simply a technical artifact.
+described in depth in Figure 2 of our manuscript. This includes 11 hepatocytes from young livers (4-month-old), 10 hepatocytes from old livers (26-month-old), and 5 mouse embryonic fibroblasts (MEFs). Of note, two cells (one young fibroblast and one old fibroblast) show abberant clustering profiles using dimensionality reduction approaches [see Figure 2 of their paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3/figures/2), and also have high predicted epigenetic ages. We suppose these cells may be senescent, but may also simply be technical artifacts.
 
-The required data to run these example scripts is provided in this repository:
-* Raw .cov.gz files of single-cell methylomes are located in `sc_data_raw`
+All the required data to run these example scripts is provided in this repository:
+* Single-cell methylation coverage files (.cov.gz) are located in `sc_data_raw`
 * Processed binary methylation matrices (produced by running `process_coverage` on raw .cov.gz files) are located in `sc_data_processed`
-* Raw bulk data for C56BL/6J liver samples used to construct sample reference models is located in `bulk`
-* Processed reference matrices (produced by running `construct_reference` on raw bulk DNAm data) for liver, blood, and multi-tissue datasets are located in `train`
+* Bulk data for C56BL/6J liver samples used to construct sample reference models is located in `bulk`
+* Processed reference matrices (produced by running `construct_reference` on bulk DNAm-age data) for liver, blood, and multi-tissue datasets are located in `train`
 
-The functions driving scAge are documented below:
+The functions driving scAge are documented in detail below:
 
 ## Data
 
