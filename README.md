@@ -44,7 +44,6 @@ To learn more about the rejuvenation event discussed in the manuscript, please c
 Epigenetic clocks reveal a rejuvenation event during embryogenesis followed by aging
 Csaba Kerepesi, Bohan Zhang, Sang-Goo Lee, Alexandre Trapp & Vadim N. Gladyshev
 Science Advances 7(26), 10.1126/sciadv.abg6082
-
 ```
 
 ## Installation
