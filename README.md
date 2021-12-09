@@ -15,7 +15,7 @@ Alexandre Trapp, Csaba Kerepesi & Vadim N. Gladyshev
 bioRxiv 2021.03.13.435247
 ```
 
-Remarkably, the <b>scAge</b> framework can also be applied to shallow methylation sequencing data, allowing for dramatic cost-effectiveness in regard to sequencing.
+Remarkably, a modification of the <b>scAge</b> framework can also be applied to shallow methylation sequencing data, allowing for dramatic cost-effectiveness in regard to sequencing.
 To learn more about this application to low-pass data, please consult the other [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.25.465778v1), as well as [Patrick Griffin's excellent TIME-Seq preprint](https://www.biorxiv.org/content/10.1101/2021.10.25.465725v1):
 
 ```
