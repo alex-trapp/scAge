@@ -99,7 +99,7 @@ All the required data to run these example scripts is provided in this repositor
 * Single-cell methylation coverage files (.cov.gz) are located in `sc_data_raw`
 * Processed binary methylation matrices (produced by running `process_coverage` on raw .cov.gz files) are located in `sc_data_processed`
 * Bulk data for C56BL/6J liver samples used to construct sample reference models is located in `bulk`
-* Processed reference matrices (produced by running `construct_reference` on bulk DNAm-age data) for liver, blood, and multi-tissue datasets are located in `train`
+* Processed reference matrices (produced by running `construct_reference` on bulk DNAm-age data) for liver, blood, muscle, and multi-tissue datasets are located in `train`
 
 The functions driving **scAge** are documented in detail below:
 
