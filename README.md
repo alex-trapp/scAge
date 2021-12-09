@@ -1,9 +1,9 @@
 ![image](images/scAge_schematic_GitHub.jpg)
 # scAge
 
-[![License badge](https://img.shields.io/static/v1?label=license&message=BSD&color=green.svg)](https://shields.io/)
-[![Lab badge](https://img.shields.io/static/v1?label=lab&message=Gladyshev&color=orange.svg)](https://shields.io/)
-[![Python badge](https://img.shields.io/static/v1?label=python&message=3.9%2B&color=pink.svg)](https://shields.io/)
+[![License badge](https://img.shields.io/static/v1?label=license&message=BSD&color=green.svg)](https://github.com/alex-trapp/scAge/blob/main/LICENSE)
+[![Lab badge](https://img.shields.io/badge/lab-Gladyshev-orange.svg)](https://gladyshevlab.bwh.harvard.edu/)
+[![Python badge](https://img.shields.io/static/v1?label=python&message=3.9%2B&color=pink.svg)](https://www.python.org/)
 [![Twitter badge](https://badgen.net/badge/icon/twitter?icon=twitter&label)](https://twitter.com/AlexandreTrapp)
 
 
