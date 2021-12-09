@@ -13,12 +13,12 @@ epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
 This computational platform is both highly scalable and deeply flexible.
 It can be used on any number of cells in parallel, and may be trained on any methylation-age dataset. <br>
 
-To learn more about <b>scAge</b>, please consult the [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1):
+To learn more about <b>scAge</b>, please consult the [Trapp et al. paper published in Nature Aging](https://www.nature.com/articles/s43587-021-00134-3):
 
 ```
 Profiling epigenetic age in single cells
 Alexandre Trapp, Csaba Kerepesi & Vadim N. Gladyshev
-bioRxiv 2021.03.13.435247
+Nature Aging 2021
 ```
 
 Remarkably, a modification of the <b>scAge</b> framework can also be applied to shallow methylation sequencing data, allowing for dramatic cost-effectiveness in regard to sequencing.
