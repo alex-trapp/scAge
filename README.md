@@ -1,6 +1,12 @@
 ![image](images/scAge_schematic_GitHub.jpg)
 # scAge
 
+[![License badge](https://img.shields.io/static/v1?label=license&message=BSD&color=green.svg)](https://shields.io/)
+[![Lab badge](https://img.shields.io/static/v1?label=lab&message=Gladyshev&color=orange.svg)](https://shields.io/)
+[![Python badge](https://img.shields.io/static/v1?label=python&message=3.9%2B&color=pink.svg)](https://shields.io/)
+[![Twitter badge](https://badgen.net/badge/icon/twitter?icon=twitter&label)](https://twitter.com/AlexandreTrapp)
+
+
 <b>scAge</b> is a framework for profiling epigenetic age at single-cell resolution, developed entirely in Python. <br> <br>
 This tool, the first available single-cell clock, inherently leverages the relationship between DNA methylation in bulk samples and chronological age to predict
 epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
