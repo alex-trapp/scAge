@@ -11,7 +11,7 @@
 This tool, the first available single-cell clock, inherently leverages the relationship between DNA methylation in bulk samples and chronological age to predict
 epigenetic age in intrinsically sparse and binarized single-cell data. <br> <br>
 This computational platform is both highly scalable and deeply flexible.
-It can be used on any number of cells, and may be trained on any methylation-age dataset. <br>
+It can be used on any number of cells in parallel, and may be trained on any methylation-age dataset. <br>
 
 To learn more about <b>scAge</b>, please consult the [Trapp et al. preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.03.13.435247v1):
 
