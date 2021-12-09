@@ -278,7 +278,7 @@ SRR3136659 | 4.0 | 0.683454 | 799350 | ... |
 SRR3136628 | 25.0 | 0.695256 | 2511084 | ... |
 
 ## Troubleshooting
-If you encounter any issues when trying to run scAge, please feel free to contact me by email: alexandre.trapp1@gmail.com. I'm always looking to improve the tool.
+If you encounter any issues when trying to run scAge, or if you have suggestions, please feel free to contact me by email: alexandre.trapp1@gmail.com. I'm always looking to improve the tool.
 
 ## Information and acknowledgments
 This software was developed by Alexandre (Alex) Trapp, Technical Research Assistant in the Gladyshev Lab 
