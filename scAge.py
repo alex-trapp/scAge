@@ -1,25 +1,52 @@
 '''
 scAge v1.0 (12/9/2021)
 
-scAge is a flexible framework for epigenetic age predictions in single cells.
+scAge is a flexible framework for epigenetic age profiling in single cells.
 For more information on the algorithm, please consult Trapp et al, Nature Aging 2021.
 If you use this software, we ask that you please cite our work.
 
-The scAge pipeline consists of three key steps:
-    1) Computing reference linear models for each CpG within a bulk DNAm matrix
-    2) Loading in and processing single-cell methylation coverage files
-    3) Predicting age of single cells from processed binary methylation matrices
+The scAge platform consists of three key steps:
+    1) Computing reference linear models for each CpG from a bulk DNAm-age matrix
+    2) Processing single-cell methylation coverage files into filtered binary matrices
+    3) Predicting epigenetic age in single cells
    
-and can be executed with the following functions:
+These steps can be executed, respectively, with the following functions:
     1) construct_reference
     2) process_coverage
     3) run_scAge
 
-For more details on the algorithm and how to run the functions, 
+For additional details on the algorithm and how to run the framework, 
 please consult the GitHub page @ https://github.com/alex-trapp/scAge/
 
-Developed by Alexandre Trapp in the Gladyshev Lab
-Copyright, Alexandre Trapp, 2021
+BSD 3-Clause License
+
+Copyright (c) 2021, Alexandre Trapp
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
 # import packages and check dependencies
@@ -98,9 +125,9 @@ def load_cov_file(args):
     '''
     Summary:
     ----------
-    This function acts as the workhorse for the parallelization function process_coverage.
+    This function acts as the worker for the parallelization function process_coverage.
     It takes as input a tuple of arguments from process_coverage and either returns a 
-    processed methylation matrix or writes it to a specified output path.
+    processed methylation matrix, or writes it to a specified output path.
     
     Refer to process_coverage for more information.
     
@@ -112,7 +139,7 @@ def load_cov_file(args):
               cov_directory -- the path to the directory containing coverage files
               max_met -- the maximum methylation rate in the .cov file (1 or 100, depending on processing)
               split -- an optional argument dictating how the file name should be split to name cells
-                       i.e. if split is ".", then "SRR3136624.cov" becomes SRR3136624 
+                       i.e. if split is ".", then "SRR3136624.cov" becomes "SRR3136624" 
               binarization -- "round" or "discard": both remove methylation values of 0.5,
                                --> "round" rounds remanining values to 0 or 1
                                --> "discard" removes remaining values that are not 0 or 1
@@ -363,13 +390,12 @@ def construct_reference(training_DNAm_matrix,
     It takes as input a training matrix of methylation values for bulk samples 
     of different ages, and computes linear associations between age and methylation
     for all CpGs in the matrix. Methylation values must range between 0 or 1, and the
-    matrix must be have samples as rows and CpGs as columns. Addditionally, there must
-    be at least one numerical column labeled "Age", which is used for computing
-    correlation and regression metrics.
+    matrix must have samples as rows and CpGs as columns. Addditionally, there must
+    be at least one numerical column labeled "Age".
     
     Parameters:
     ----------
-    training_DNAm_matrix: pandas dataframe of samples (rows) and CpG sites (columns)
+    training_DNAm_matrix: pandas DataFrame of samples (rows) and CpG sites (columns)
                           with some additional metadata columns (at least "Age")
     output_path: the full path to the desired output reference file
     n_cores: the number of cores to use for parallel processing
@@ -706,13 +732,13 @@ def run_scAge(single_cell_dir_or_dict,
     '''
     Summary:
     ----------
-    This is the main function of the pipeline. It parallelizes compute_probabilities,
+    This is the main function of the framework. It parallelizes compute_probabilities,
     enabling rapid and scalable estimation of epigenetic age across many cells simultaneously.
     It takes as input a single-cell profile and a reference matrix, and returns
     a dataframe with predicted epigenetic age (scDNAm age), as well as abundant 
     information regarding single-cell characteristics and age-correlated CpGs 
     chosen as part of the algorithm. These additional columns are useful to conduct
-    downstream analyses on covariates and other techincal or biological factors.
+    downstream analyses on covariates and other technical or biological factors.
     
     Parameters:
     ----------
@@ -720,7 +746,7 @@ def run_scAge(single_cell_dir_or_dict,
                              data as .tsv/.tsv.gz files (i.e. generated by process_coverage),
                              or a dictionary of labeled methylation matrices
     single_cell_set_name: str, the desired name of the single cell data
-                          this is used in setting the name of the output file
+                          this is used for setting the name of the output file
     reference_data: str, the full file path to the desired reference data
     selection_mode: str, one of [numCpGs, percentile, cutoff] where
                          percentile -- selects the top x% age-associated CpGs per cell
@@ -744,8 +770,8 @@ def run_scAge(single_cell_dir_or_dict,
               
     Returns:
     ----------
-    2 files are created: 1 .report.txt file containing the parameters used in running the algorithm
-                         and 1 .tsv file containing the results and predictions for each single cell
+    2 files are created: one .report.txt file containing the parameters used in running the algorithm
+                         and one .tsv file containing the results and predictions for each single cell
     
     '''
     
@@ -833,7 +859,7 @@ def run_scAge(single_cell_dir_or_dict,
     # create tuple of arguments for parallel processing
     list_of_arguments_parallel_scAge = []
     
-    # if the full path path to processed single cell methylation files is given
+    # if the full path path to processed single-cell methylation files is given
     if input_type == "<class 'str'>":
         for cell in single_cells:
             if add_gz == True:
