@@ -57,7 +57,7 @@ For now, to install scAge and associated data, please clone the GitHub repositor
 
 This will download all required data to utilize and test the software. <br>
 
-Warning: downloading the full repository will take up about ~650 MB of space on your disk.
+Warning: downloading the full repository will take up about ~620 MB of space on your disk.
 
 For ease of use, all functions needed to run the full scAge pipeline are directly included within the `scAge.py` script.
 
