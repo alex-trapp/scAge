@@ -32,7 +32,7 @@ Csaba Kerepesi, Nicole Noren Hooten, James Mitchell, Michele Evans, Vadim N. Gla
 bioRxiv 2021.10.25.465725
 ```
 
-To learn more about the rejuvenation event discussed in the manuscript, please consult the [Kerepesi et al. paper published in Science Advances](https://advances.sciencemag.org/content/7/26/eabg6082), which analyzed embryonic epigenetic dynamics at the bulk level:
+To learn more about the rejuvenation event discussed in the manuscript, please consult the [Kerepesi et al. paper published in Science Advances](https://advances.sciencemag.org/content/7/26/eabg6082), which analyzes embryonic epigenetic dynamics at the bulk level:
 
 ```
 Epigenetic clocks reveal a rejuvenation event during embryogenesis followed by aging
@@ -57,7 +57,7 @@ For ease of use, all functions needed to run the full scAge pipeline are directl
 
 ## Usage
 
-To run <b>scAge</b>, first add the directory containing scAge.py to your path, then import scAge into a Python script or Jupyter notebook:
+To run <b>scAge</b>, first add the directory containing `scAge.py` to your path, then import <b>scAge</b> into a Python script or Jupyter notebook:
 
 ```
 import sys
