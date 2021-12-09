@@ -81,10 +81,10 @@ Predicted epigenetic age output dataframes are conveniently written to .tsv file
 
 ## Example notebooks
 
-A set of 3 example Jupyter notebooks detailing how to use the scAge tool are provided in the `notebooks` directory: <br>
+A set of 3 example Jupyter notebooks detailing how to use the <b>scAge</b> tool are provided in the `notebooks` directory: <br>
 * `process_coverage_notebook.ipynb` --> processing .cov/.cov.gz Bismark-generated files into filtered binary methylation matrices <br>
 * `construct_reference_notebook.ipynb` --> constructing a reference set of linear models from a bulk methylation-age matrix <br>
-* `run_scAge_notebook.ipynb` --> predicting epigenetic age in single cells, using binary single-cell matrices and the precomputed reference set <br>
+* `run_scAge_notebook.ipynb` --> predicting epigenetic age in single cells, using binary single-cell matrices and a precomputed reference set <br>
 
 These notebooks use all the murine single cells from the [Gravina et al. 2016 study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3),
 described in depth in Figure 2 of our manuscript. This includes 11 hepatocytes from young livers (4-month-old), 10 hepatocytes from old livers (26-month-old), and 5 mouse embryonic fibroblasts (MEFs). Of note, two cells (one young fibroblast and one old fibroblast) show abberant clustering profiles using dimensionality reduction approaches ([see Figure 2c of their paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3/figures/2)). These cells also have high predicted epigenetic ages. We suppose these cells may be senescent, but these results may also simply be due to technical artifacts.
@@ -95,7 +95,7 @@ All the required data to run these example scripts is provided in this repositor
 * Bulk data for C56BL/6J liver samples used to construct sample reference models is located in `bulk`
 * Processed reference matrices (produced by running `construct_reference` on bulk DNAm-age data) for liver, blood, and multi-tissue datasets are located in `train`
 
-The functions driving scAge are documented in detail below:
+The functions driving **scAge** are documented in detail below:
 
 ## Data
 
@@ -111,9 +111,9 @@ Study | GEO Accession |
 
 In the case of the [Gravina et al. 2016 study](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3), no deposition of processed methylation data was made to GEO. I downloaded trimmed FASTQ files from the SRA (accession [SRA344045](https://www.ncbi.nlm.nih.gov/sra/?term=sra344045)) using the `fasterq-dump` function from the SRA Toolkit and mapped them to the mm10/GRCm38.p6 genome using [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/) v0.22.3 with the option `–non_directional`, as suggested by the [Bismark User Guide v0.21.0](https://rawgit.com/FelixKrueger/Bismark/master/Docs/Bismark_User_Guide.html) for Zymo Pico-Methyl scWGBS library preparations. Reads were subsequently deduplicated and methylation levels for CpG sites were extracted with Bismark.
 
-## Speed, Memory and Parallelization
+## Speed, Memory Use and Parallelization
 
-The three functions described below, `construct_reference`, `process_coverage` and `run_scAge` are fully functional running on a single core (the default is `n_cores` = 1). However, they all experience linear speedup when multiprocessing is applied. Depending on your hardware specifications, it is recommended to increase the number of cores (`n_cores`) to improve the speed and efficiency of the pipeline. In my testing, I used `n_cores` = 30.
+The three functions described below, `construct_reference`, `process_coverage` and `run_scAge` are fully functional running on a single core (the default is `n_cores` = 1). However, they all experience linear speedup when multiprocessing is applied. Depending on your hardware specifications, it is recommended to increase the number of cores (`n_cores`) to improve the speed and efficiency of the pipeline. In most of my testing, I used `n_cores` = 30.
 
 `process_coverage` and `run_scAge` can consume a lot of RAM depending on how many cells are being processed simulatenously, so it is recommended to observe processes and memory allocation (i.e. via `htop`) when running the algorithms for the first time with new parameters/cells. 
 
@@ -122,7 +122,7 @@ Speed and memory usage benchmarks for different datasets and parameters will be 
 ## Training
 
 CpG-specific linear models are first calculated using a reference bulk methylation matrix, which may contain some missing values.
-From our findings so far, using single tissue  datasets is preferred to improve profiling accuracy,
+From our findings so far, using single tissue datasets is preferred to improve profiling accuracy,
 although multi-tissue datasets may also be used for training with reasonable predictions.
 
 I provide pre-computed liver, blood, and multi-tissue training reference datasets for C57BL/6J mice inside of the `train` directory.
@@ -139,12 +139,12 @@ scAge.construct_reference(training_DNAm_matrix,
 where:
 * `training_DNAm_matrix` --> input bulk methylation matrix <br>
 * `output_path` --> desired full path to the output reference matrix (/path/to/file.tsv) <br>
-* `n_cores` --> number of cores to use for parallel processing <br>
-* `chunksize` --> number of individual CpG methylation series to distribute at once to each worker <br>
+* `n_cores` --> number of cores to use for parallel processing (more cores -> faster) <br>
+* `chunksize` --> number of individual CpG methylation series to distribute at once to each worker/core <br>
 
-This function takes as input a pandas DataFrame DNAm matrix, with rows as samples and columns as CpGs (in the form chr9_85324737). <br>
+This function takes as input a pandas DataFrame DNAm matrix, with **rows as samples and columns as CpGs (in the form chr9_85324737)**. <br>
 Methylation values must be in the range from 0 (fully unmethylated) to 1 (fully methylated). <br>
-This dataframe must also contain a numeric "Age" column, which is used to compute correlations and linear regression models. <br>
+This dataframe **must also contain a numeric "Age" column**, which is used to compute correlations and linear regression models. <br>
 The input file format is shown below:
 
 Sample | chr9_85324737 | chr15_85673573 | ... | Age |
@@ -153,7 +153,7 @@ GSM3394403  | 0.328125 | 0.717949 | ... | 2 |
 GSM3394378	| 0.512195 | 0.439024 | ... | 10 |
 GSM3394354	| 0.767857 | 0.333333 | ... | 20 |
 
-An example compressed bulk HDF matrix of C57BL/6J mice livers is provided in the `bulk` directory <br>
+An example compressed bulk matrix of C57BL/6J mice livers (in hdf format) is provided in the `bulk` directory <br>
 
 The output of this function is a .tsv file with the following format:
 ChrPos | PearsonR | PearsonP | Coef | Intercept |
@@ -164,22 +164,22 @@ chr1_3037820	| 0.066107 | 0.733323 | 0.000766 | 0.723581	|
 
 ## Loading single-cell methylomes
 
-scAge requires binary methylation matrices as input for the core epigenetic age profiling algorithm. These binary matrices can be obtained
+**scAge** requires binary methylation matrices as input for the core epigenetic age profiling algorithm. These binary matrices can be obtained
 by processing existing .cov files produced by [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/) with our function
-`process_coverage`. However, there are other tools to process FASTQ bisulfite sequencing data, such as [BSSeeker](https://github.com/BSSeeker/BSseeker2) and [methylpy](https://github.com/yupenghe/methylpy). Therefore, final single-cell methylome files may have slightly different formats depending on the tool used. The Bismark .cov file format is the following (the columns are not named in the file, they start directly with data):
+`process_coverage`. However, there are other tools to process FASTQ bisulfite sequencing data, such as [BSSeeker](https://github.com/BSSeeker/BSseeker2) and [methylpy](https://github.com/yupenghe/methylpy). Therefore, final single-cell methylome files may have slightly different formats depending on the tool used. The Bismark .cov file format is the following (the columns are not named in the first row of the file, they start directly with data):
 
 Chromosome | Position 1 | Position 2 | Methylation level | Methylated counts | Unmethylated counts
 :---: | :---: | :---: | :---: | :---: | :---: 
 11 | 3100225 | 3100225 | 100 | 1 | 0
 11 | 3101286 | 3101286 | 0 | 0 | 2
 
-Native support for a variety of input formats will be added shortly. For now, I recommend processing single-cell methylation data with [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/) or converting existing methylation data to a Bismark format (shown above).
+Native support for a variety of input formats will be added shortly. For now, I recommend processing single-cell methylation data with [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/) or converting existing methylation data to a Bismark-like format (shown above).
 
-Most of the publicly available data used in our study were in the .cov format, including data from [Hernando-Herraez et al](https://www.nature.com/articles/s41467-019-12293-4), [Angermueller et al.](https://www.nature.com/articles/nmeth.3728) and [Smallwood et al.](https://www.nature.com/articles/nmeth.3035). The sequencing data from the [Gravina et al.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3) study was also processed via the Bismark pipeline. Supplementary methylation data from [Argelaguet et al.](https://www.nature.com/articles/s41586-019-1825-8) 
+Most of the publicly available data used in our study were available in the .cov format, including data from [Hernando-Herraez et al](https://www.nature.com/articles/s41467-019-12293-4), [Angermueller et al.](https://www.nature.com/articles/nmeth.3728) and [Smallwood et al.](https://www.nature.com/articles/nmeth.3035). The sequencing data from the [Gravina et al.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1011-3) study was also processed via the Bismark pipeline. Supplementary methylation data from [Argelaguet et al.](https://www.nature.com/articles/s41586-019-1825-8) 
 contained the same information as .cov files, but the columns were labeled and in a different order. These files were handled and modified separately to ensure
 the required format for scAge.
 
-Ultimately, scAge requires a .tsv or .tsv.gz file or pandas DataFrame formatted with two columns, as shown below.
+Ultimately, **scAge** requires a .tsv or .tsv.gz file, or a pandas DataFrame formatted with two columns, as shown below.
 
 `ChrPos` should be in the form 'chr_position' (i.e. 'chr1_3037802'), while `MetLev` should be binary (0 or 1).
 
@@ -208,16 +208,15 @@ If `output_path` is set to `None`, named binary methylation matrices are returne
 * `n_cores` --> number of cores to use for parallel processing <br>
 * `maxmet` --> maximum methylation value (normally, methylation ratios of Bismark-generated files range from 0 to 100) <br>
 * `split` --> desired string to split the file name on for single-cell name generation (if split is ".", then "SRR3136624.cov" becomes "SRR3136624") <br>
-* `chunksize` --> number of coverage files that will be fed into a worker process at a time <br>
+* `chunksize` --> number of coverage files that will be fed into one worker process at a time <br>
 * `binarization` --> choice of `round` vs. `discard`. Both methods involve dropping methylation values of 0.5:
                     `round` rounds remaining non-binary values to 0 or 1 (this is the default), while
-                    `discard` discards remaining non-binary values.
+                    `discard` discards remaining non-binary values. Most values are already binary in single-cell data.
 
 
 ## Predicting epigenetic age
 
-The core of scAge is `run_scAge`, a function that enables epigenetic age predictions from a processed set of binarized single-cell
-methylome profiles and a reference regression matrix generated from bulk data (ideally from the same tissue). To run this function:
+The core of **scAge** is `run_scAge`, a function that enables epigenetic age predictions from a processed set of binarized single-cell methylome profiles and a reference regression matrix generated from bulk data (ideally from the same tissue). To run this function:
 
 ```
 scAge.run_scAge(single_cell_dir_or_dict,
@@ -273,10 +272,10 @@ SRR3136659 | 4.0 | 0.683454 | 799350 | ... |
 SRR3136628 | 25.0 | 0.695256 | 2511084 | ... |
 
 ## Troubleshooting
-If you encounter any issues when trying to run scAge, please feel free to contact me by email: alexandre.trapp1@gmail.com
+If you encounter any issues when trying to run scAge, please feel free to contact me by email: alexandre.trapp1@gmail.com. I'm always looking to improve the tool.
 
 ## Information and acknowledgments
-This software was developed by Alexandre Trapp, Technical Research Assistant in the Gladyshev Lab 
+This software was developed by Alexandre (Alex) Trapp, Technical Research Assistant in the Gladyshev Lab 
 at Harvard Medical School and Brigham and Women's Hospital. I want to acknowledge all the members
 of the Gladyshev Lab for their input, particularly Csaba Kerepesi and Vadim Gladyshev for their
 contributions to the project, as well as Tiamat Fox and Adit Ganguly for their help with schematic
